@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="../DataAccess/DataAccess.csproj" />
+		<ProjectReference Include="../Library/Library.csproj" />
+	</ItemGroup>
+
 </Project>

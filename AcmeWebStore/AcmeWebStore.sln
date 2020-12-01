@@ -4,10 +4,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeWebStore", "AcmeWebStore\AcmeWebStore.csproj", "{DA7D588B-5291-4B1F-BF4A-E940A8A83254}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B3B0DA2B-67B3-41CD-8119-56EA15AF6DA2} = {B3B0DA2B-67B3-41CD-8119-56EA15AF6DA2}
+		{7A799E6F-0843-4BAF-A56C-C0DE1C01770E} = {7A799E6F-0843-4BAF-A56C-C0DE1C01770E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "Library\Library.csproj", "{7A799E6F-0843-4BAF-A56C-C0DE1C01770E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B3B0DA2B-67B3-41CD-8119-56EA15AF6DA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B3B0DA2B-67B3-41CD-8119-56EA15AF6DA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

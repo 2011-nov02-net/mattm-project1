@@ -8,7 +8,7 @@ namespace Library.Model
     {
         private int _id;
         private string _city;
-        private string? _state;
+        private string _state;
         private string _country;
 
         public string city

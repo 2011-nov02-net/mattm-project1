@@ -3,17 +3,19 @@
 *@
 @{
     ViewData["Title"] = "Index";
+    
 }
 
 <h2>Acme Web Store</h2>
+<h4>Proudly serving our customers from @ViewBag.numStores locations everyday!</h4>
 
 <p>Welcome to Acme! </p>
 
-<button class="'btn btn-secondary text-white">
-    <a href="Store/NewUser">New User</a>
+<button id="newUserButton" class="btn btn-secondary text-white">
+   New User
 </button>
-<button class="'btn btn-primary text-white">
-    <a href="Store/SignIn">Sign in</a>
+<button id="signUpButton" class="btn btn-primary text-white">
+    Sign in
 </button>
 
 

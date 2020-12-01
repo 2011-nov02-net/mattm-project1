@@ -10,7 +10,8 @@ namespace AcmeWebStore.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            ViewBag.numStores = 5;
+            return View(ViewBag);
         }
 
         public IActionResult NewUser()

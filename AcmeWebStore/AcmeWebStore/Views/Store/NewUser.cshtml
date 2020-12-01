@@ -10,75 +10,50 @@
     <div class="row">
         <form class="col s12" id="signUpForm">
             <div class="row">
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control col s6">
                     <input name="email" placeholder="Email" id="signUpEmail" type="email" class='validate' required />
                     <span class="helper-text" data-error="Please enter an email adress"></span>
                 </div>
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control  col s6">
                     <input name="username" placeholder="Username" id="signUpUsername" type="text" class='validate' required />
                     <span class="helper-text" data-error="Please enter a username"></span>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control   col s6">
                     <input name="firstname" placeholder="First name" id="signUpFirstname" type="text" />
                 </div>
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control   col s6">
                     <input name="lastname" placeholder="Last name" id="signUpLastname" type="text" />
                 </div>
             </div>
             <div class="row">
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control   col s6">
                     <input name="password" placeholder="Password" id="signUpPassword" type="password" class='validate' required />
                     <span class="helper-text" data-error="Please make a password"></span>
                 </div>
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control  unBoxInput col s6">
                     <input name="confirmPassword" placeholder="Confirm Password" id="signUpConfirmPassword" type="password" class='validate' required />
                     <span class="helper-text" data-error="Please confirm your password"></span>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control  col s6">
                     <input name="city" placeholder="City" id="signUpCity" type="text" />
                 </div>
-                <div class="input-field unBoxInput col s6">
+                <div class="form-control   col s6">
                     <input name="state" placeholder="State" id="signUpState" type="text" />
                 </div>
             </div>
             <div class="row">
-                <div class="col s12 m4 offset-m1">
-                    <div class="card" id="avatarSelectCard">
-                        <div class="card-image">
-                            <img id="avatarSelectImage" src="/assets/images/blueMeeple.jpg">
-                            <hr>
-                        </div>
-                        <div class="input-field col s12">
-                            <select id="avatarSelect">
-                                <option value="" disabled selected>Choose your Avatar</option>
-                                {{#each meeple}}
-                                <option value="{{this.image}}">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="input-field unBoxInput col s6 offset-s1">
-                    <input name="zip" placeholder="Zip Code" id="signUpZip" type="text" />
-                    <div class='row'>
-                        <p class='col s9 offset-s1'>
-                            <label>
-                                <input type="checkbox" class='onlineGamingCheck' />
-                                <span>Are you interested in an online group?</span>
-                            </label>
-                        </p>
-                    </div>
+               
+               
                     <div class='row center'>
-                        <button class='waves-effect waves-light center btn-large' id='signUpBtn'>
+                        <button class='btn' id='signUpBtn'>
                             Sign Up <i class="fas fa-chess-pawn"></i>
                         </button>
                     </div>
-                </div>
+               
             </div>
 
         </form>

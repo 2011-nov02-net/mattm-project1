@@ -11,7 +11,9 @@ namespace AcmeWebStore.Controllers
         public IActionResult Index()
         {
             ViewBag.numStores = 5;
-            return View(ViewBag);
+            ViewBag.sales = 10223213;
+            //ViewBag.sales = 1000000 + 
+            return View();
         }
 
         public IActionResult NewUser()

@@ -8,11 +8,11 @@
 //Home Page Scripts
 ///
 
-const signUpButton = $("#signUpButton");
+const signInButton = $("#signInButton");
 const newUserButton = $("#newUserButton");
 
-signUpButton.on("click", () => {
-    window.location.href = "Store/SignUp"
+signInButton.on("click", () => {
+    window.location.href = "Store/SignIn"
 });
 
 newUserButton.on("click", () => {

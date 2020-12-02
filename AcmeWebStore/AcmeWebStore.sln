@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "Library\Library.csproj", "{7A799E6F-0843-4BAF-A56C-C0DE1C01770E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B3B0DA2B-67B3-41CD-8119-56EA15AF6DA2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7A799E6F-0843-4BAF-A56C-C0DE1C01770E} = {7A799E6F-0843-4BAF-A56C-C0DE1C01770E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

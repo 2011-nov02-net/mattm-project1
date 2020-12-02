@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-    class ProductRepository
+    public class ProductRepository
     {
     }
 }

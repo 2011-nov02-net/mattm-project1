@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Repositories;
+using Library.Interfaces;
 using DataAccess;
 
 namespace AcmeWebStore
@@ -25,7 +27,9 @@ namespace AcmeWebStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AcmedbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AcmeDb")));            
+            services.AddDbContext<AcmedbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AcmeDb")));
+
+            services.AddScoped<ILocationRepository, LocationRepository>();
             
             services.AddControllersWithViews();
         }

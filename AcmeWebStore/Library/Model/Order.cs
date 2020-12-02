@@ -12,9 +12,19 @@ namespace Library.Model
         private Dictionary<int, int> _orderContents;
 
 
-        public void AddToOrder(int prodId, int quant)
+        public void AddToOrder(int prodId, int quant, int available)
         {
-            _orderContents.Add(prodId, quant);
+            if(CheckStock(quant, available))
+            {
+                _orderContents.Add(prodId, quant);
+            }
+
+          
+        }
+
+        public bool CheckStock(int requestQuant, int availableQuant)
+        {
+            return (requestQuant <= availableQuant);
         }
     }
 }

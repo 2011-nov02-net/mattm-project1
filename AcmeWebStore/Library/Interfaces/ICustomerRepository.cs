@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Repositories
+namespace Library.Interfaces
 {
-    public class OrderRepository
+    interface ICustomerRepository1
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.Interfaces
 {
-    interface ICustomerRepository1
+    interface ICustomerRepository
     {
     }
 }

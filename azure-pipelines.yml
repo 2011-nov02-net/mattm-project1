@@ -22,13 +22,13 @@ steps:
     version: '5.0.100'
     includePreviewVersions: true
 
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(buildConfiguration)'
-    publishTestResults: true
-    workingDirectory: '3-mvc/SimpleOrderApp'
+# - task: DotNetCoreCLI@2
+#   displayName: dotnet test
+#   inputs:
+#     command: 'test'
+#     arguments: '--configuration $(buildConfiguration)'
+#     publishTestResults: true
+#     workingDirectory: '3-mvc/SimpleOrderApp'
 
 - script: dotnet publish --configuration $(buildConfiguration) --output publish
   displayName: 'dotnet build $(buildConfiguration)'

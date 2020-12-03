@@ -21,15 +21,24 @@ steps:
     packageType: 'sdk'
     version: '5.0.100'
     includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    publishTestResults: true
+    workingDirectory: AcmeWebStore/AcmeWebStore
+
+
 - script: dotnet publish --configuration $(buildConfiguration) --output publish
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: AcmeWebStore/AcmeWebStore
-
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1 (a7c7be2b-dec9-4b29-b6aa-d73e6d6ad223)'
     appType: 'webApp'
     WebAppName: 'AnotherTestWebApp'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: 'AcmeWebStore/AcmeWebStore/publish'
 

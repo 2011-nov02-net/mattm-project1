@@ -39,5 +39,5 @@ steps:
     azureSubscription: 'Azure subscription 1 (a7c7be2b-dec9-4b29-b6aa-d73e6d6ad223)'
     appType: 'webApp'
     WebAppName: 'AnotherTestWebApp'
-    packageForLinux: 'AcmeWebApp/AcmeWebStore/bin/Debug/net5.0/publish'
+    packageForLinux: 'AcmeWebStore/AcmeWebStore/bin/Debug/net5.0/publish'
 

@@ -29,11 +29,30 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
     publishTestResults: true
     workingDirectory: AcmeWebStore/AcmeWebStore
+    
+- task: SonarCloudPrepare@1
+  displayName: SonarCloudPrep
+  inputs:
+    SonarCloud: 'sonarCloud'
+    organization: '2011-nov02-net'
+    scannerMode: 'MSBuild'
+    projectKey: '2011-nov02-net_mattm-project1'
+    projectName: 'mattm-project1'
+
+- task: SonarCloudAnalyze@1
+  displayName: SonarAnalyze
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 
 - script: dotnet publish --configuration $(buildConfiguration) --output publish
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: AcmeWebStore/AcmeWebStore
+
+
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'

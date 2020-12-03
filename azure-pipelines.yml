@@ -46,7 +46,7 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: AcmeWebStore/AcmeWebStore
 
-    
+- task: SonarCloudAnalyze@1
 
 
 - task: SonarCloudPublish@1

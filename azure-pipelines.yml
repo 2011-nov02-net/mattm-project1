@@ -22,14 +22,7 @@ steps:
     packageType: 'sdk'
     version: '2.x'
     includePreviewVersions: true
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(buildConfiguration)'
-    publishTestResults: true
-    workingDirectory: AcmeWebStore/AcmeWebStore
-    
+
 - task: SonarCloudPrepare@1
   displayName: SonarCloudPrep
   inputs:
@@ -46,6 +39,14 @@ steps:
     version: '5.x'
     includePreviewVersions: true
 
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    publishTestResults: true
+    workingDirectory: AcmeWebStore/AcmeWebStore
+    
 - task: SonarCloudAnalyze@1
   displayName: SonarAnalyze
 

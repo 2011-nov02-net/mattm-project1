@@ -15,13 +15,13 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 5.0.100'
+  displayName: 'Use .NET Core sdk 2.x'
   inputs:
     packageType: 'sdk'
-    version: '5.0.100'
+    version: '2.x'
     includePreviewVersions: true
-
 - task: DotNetCoreCLI@2
   displayName: dotnet test
   inputs:
@@ -38,6 +38,13 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '2011-nov02-net_mattm-project1'
     projectName: 'mattm-project1'
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk 5.x'
+  inputs:
+    packageType: 'sdk'
+    version: '5.x'
+    includePreviewVersions: true
 
 - task: SonarCloudAnalyze@1
   displayName: SonarAnalyze

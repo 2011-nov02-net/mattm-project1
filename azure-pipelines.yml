@@ -39,13 +39,9 @@ steps:
     version: '5.x'
     includePreviewVersions: true
 
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
-  inputs:
-    command: 'test'
-    arguments: '--configuration $(buildConfiguration)'
-    publishTestResults: true
-    workingDirectory: AcmeWebStore/AcmeWebStore
+- script: dotnet build
+
+
     
 - task: SonarCloudAnalyze@1
   displayName: SonarAnalyze
@@ -54,6 +50,13 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    publishTestResults: true
+    workingDirectory: AcmeWebStore/AcmeWebStore
 
 - script: dotnet publish --configuration $(buildConfiguration) --output publish
   displayName: 'dotnet build $(buildConfiguration)'

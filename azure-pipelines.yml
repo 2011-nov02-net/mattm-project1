@@ -31,6 +31,9 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '2011-nov02-net_mattm-project1'
     projectName: 'mattm-project1'
+    extraProperties: |
+
+      # sonar.exclusions=**/lib/**
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core sdk 5.x'
@@ -44,8 +47,7 @@ steps:
   workingDirectory: AcmeWebStore/AcmeWebStore
 
     
-- task: SonarCloudAnalyze@1
-  displayName: SonarAnalyze
+
 
 - task: SonarCloudPublish@1
   inputs:

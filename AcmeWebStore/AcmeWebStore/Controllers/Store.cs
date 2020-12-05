@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Repositories;
 using Library.Interfaces;
+using Library.Model;
 
 
 namespace AcmeWebStore.Controllers
@@ -30,6 +31,15 @@ namespace AcmeWebStore.Controllers
 
         public IActionResult SignIn()
         {
+            return View();
+        }
+
+        public IActionResult Locations()
+        {
+            IEnumerable<Location> locations = Repo.getLocations().ToList();
+            
+                ViewData["Locations"] = locations;
+          
             return View();
         }
        

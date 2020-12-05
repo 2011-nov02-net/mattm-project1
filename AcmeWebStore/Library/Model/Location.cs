@@ -7,11 +7,36 @@ namespace Library.Model
     public class Location
     {
         private int _id;
+        private string _address;
         private string _city;
         private string _state;
         private string _country;
 
-        public string city
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                if (value < 1)
+                {
+                    throw new ArgumentException("Id must be greater than 0");
+                }
+                _id = value;
+            }
+        }
+        public string Address
+        {
+            get => _address;
+            set
+            {
+                if (value.Length < 1)
+                {
+                    throw new ArgumentException("Address must be at least 1 character in length");
+                }
+                _address = value;
+            }
+        }
+        public string City
         {
             get => _city;
             set
@@ -23,7 +48,7 @@ namespace Library.Model
                 _city = value;
             }
         }
-        public string state
+        public string State
         {
             get => _state;
             set
@@ -35,7 +60,7 @@ namespace Library.Model
                 _state = value;
             }
         }
-        public string country
+        public string Country
         {
             get => _country;
             set

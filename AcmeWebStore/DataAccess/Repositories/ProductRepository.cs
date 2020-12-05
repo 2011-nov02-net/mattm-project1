@@ -8,5 +8,10 @@ namespace DataAccess.Repositories
 {
     public class ProductRepository
     {
+        private readonly AcmedbContext dbContext;
+        public ProductRepository(AcmedbContext context)
+        {
+            dbContext = context;
+        }
     }
 }

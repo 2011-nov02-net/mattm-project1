@@ -11,7 +11,9 @@ namespace Library.Interfaces
     {
         int CountLocations();
 
-         IEnumerable<Location> getLocations();
+        IEnumerable<Location> GetLocations();
+
+        Location GetLocationById(int id);
     }
    
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Library.Model;
 
 namespace Library.Interfaces
 {
-    interface IOrderRepository
+    public interface IOrderRepository
     {
+       // void CreateOrder(Order x);
     }
 }

@@ -36,12 +36,51 @@ namespace AcmeWebStore.Controllers
 
         public IActionResult Locations()
         {
-            IEnumerable<Location> locations = Repo.getLocations().ToList();
+            IEnumerable<Location> locations = Repo.GetLocations().ToList();
             
                 ViewData["Locations"] = locations;
           
             return View();
         }
-       
+
+        public IActionResult Locations(int id)
+        {
+            Location thisLocation = Repo.GetLocationById(id);
+            ViewData["Location"] = thisLocation;
+            return View();
+        }
+
+        public IActionResult newOrder()
+        {
+            return View();
+        }
+        public IActionResult CreateOrder()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(ViewModels.OrderViewModel viewModel)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            var order = new Order();
+
+        //            Repo.AddOrder(order);
+        //            Repo.Save();
+
+        //            return RedirectToAction(nameof(Index));
+        //        }
+        //        //return View(viewModel);
+        //    }
+        //    catch
+        //    {
+        //        return View(viewModel);
+        //    }
+        //}
+
     }
 }

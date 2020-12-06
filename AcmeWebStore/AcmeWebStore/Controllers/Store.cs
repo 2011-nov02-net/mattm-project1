@@ -33,31 +33,16 @@ namespace AcmeWebStore.Controllers
         {
             return View();
         }
+  
 
-        public IActionResult Locations()
-        {
-            IEnumerable<Location> locations = Repo.GetLocations().ToList();
-            
-                ViewData["Locations"] = locations;
-          
-            return View();
-        }
-
-        public IActionResult LocationInventory(int id)
-        {
-            Location thisLocation = Repo.GetLocationById(id);
-            ViewData["Location"] = thisLocation;
-            return View();
-        }
-
-        public IActionResult newOrder()
-        {
-            return View();
-        }
-        public IActionResult CreateOrder()
-        {
-            return View();
-        }
+        //public IActionResult newOrder()
+        //{
+        //    return View();
+        //}
+        //public IActionResult CreateOrder()
+        //{
+        //    return View();
+        //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

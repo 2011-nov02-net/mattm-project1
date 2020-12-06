@@ -8,33 +8,19 @@
     <h3 class='center'>Create an Account</h3>
     <div class='center' id='signupAlertDiv'></div>
     <div class="row">
-        <form class="col s12" id="signUpForm">
+        <form class=" form-group  s12" id="signUpForm">
             <div class="row">
-                <div class="form-control col s6">
-                    <input name="email" placeholder="Email" id="signUpEmail" type="email" class='validate' required />
-                    <span class="helper-text" data-error="Please enter an email adress"></span>
+                <div class="form-control   col s6">
+                    <input name="firstname" placeholder="First name" id="signUpFirstname" type="text" class='validate' required />
                 </div>
-                <div class="form-control  col s6">
-                    <input name="username" placeholder="Username" id="signUpUsername" type="text" class='validate' required />
-                    <span class="helper-text" data-error="Please enter a username"></span>
+                <div class="form-control   col s6">
+                    <input name="lastname" placeholder="Last name" id="signUpLastname" type="text" class='validate' required />
                 </div>
             </div>
             <div class="row">
-                <div class="form-control   col s6">
-                    <input name="firstname" placeholder="First name" id="signUpFirstname" type="text" />
-                </div>
-                <div class="form-control   col s6">
-                    <input name="lastname" placeholder="Last name" id="signUpLastname" type="text" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control   col s6">
-                    <input name="password" placeholder="Password" id="signUpPassword" type="password" class='validate' required />
+                <div class="form-control   col s12">
+                    <input name="address" placeholder="Address" id="signUpAddress" type="text" class='validate' required />
                     <span class="helper-text" data-error="Please make a password"></span>
-                </div>
-                <div class="form-control  unBoxInput col s6">
-                    <input name="confirmPassword" placeholder="Confirm Password" id="signUpConfirmPassword" type="password" class='validate' required />
-                    <span class="helper-text" data-error="Please confirm your password"></span>
                 </div>
             </div>
             <div class="row">
@@ -45,12 +31,17 @@
                     <input name="state" placeholder="State" id="signUpState" type="text" />
                 </div>
             </div>
-            <div class="row">             
-                    <div class='row center'>
-                        <button class='btn' id='signUpBtn'>
-                            Sign Up 
-                        </button>
-                    </div>               
+            <div class="row">
+                <div class="form-control  col s6">
+                    <input name="country" placeholder="Country" id="signUpCountry" type="text" />
+                </div>
+            </div>
+            <div class="row">
+                <div class='row center'>
+                    <button class='btn' id='signUpBtn'>
+                        Sign Up
+                    </button>
+                </div>
             </div>
         </form>
     </div>

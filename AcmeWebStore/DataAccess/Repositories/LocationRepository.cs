@@ -40,7 +40,7 @@ namespace DataAccess.Repositories
         public Library.Model.Location GetLocationById(int id)
         {
             Library.Model.Location location = DataAccess.Mapper.MapLocationWithInventory(
-                dbContext.Locations.Include(l => l.LocationStocks).
+                dbContext.Locations.Include(l => l.LocationStocks).ThenInclude(l => l.Product).
                 FirstOrDefault(l => l.Id == id));
           
             return location;

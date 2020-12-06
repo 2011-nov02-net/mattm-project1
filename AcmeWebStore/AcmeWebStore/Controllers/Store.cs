@@ -43,7 +43,7 @@ namespace AcmeWebStore.Controllers
             return View();
         }
 
-        public IActionResult Locations(int id)
+        public IActionResult LocationInventory(int id)
         {
             Location thisLocation = Repo.GetLocationById(id);
             ViewData["Location"] = thisLocation;

@@ -17,7 +17,7 @@ namespace DataAccess.Repositories
         public void CreateOrder(Order newOrder, int customerId, int locationId)
         {
             dbContext.Orders.Add(newOrder);
-            throw new NotImplementedException();
+           
         }
     }
 }

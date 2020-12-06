@@ -40,7 +40,7 @@ namespace Library.Model
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Price must be greater than 0
+                    throw new ArgumentException("Price must be greater than 0");
                 }
 
                 _price = value;

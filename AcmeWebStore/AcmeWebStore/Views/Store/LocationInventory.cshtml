@@ -1,0 +1,43 @@
+﻿@using Library.Model;
+
+@{
+
+    Location location = ViewData["Location"] as Location;
+}
+
+
+<h1>Inventory</h1>
+
+<h2> Acme @location.City</h2>
+<h4>@(location.Address), @(location.City), @(location.State), @(location.Country)</h4>
+
+<table class="table">
+    <tr>
+        <th>Name </th>
+        <th>Price</th>
+        <th> Quantity</th>
+    </tr>
+    @foreach (KeyValuePair<Product, int> entry in location.inventory)
+    {
+        <tr>
+            <td>
+                @entry.Key.Name
+            </td>
+            <td>
+
+                @entry.Key.Price
+            </td>
+            <td>
+                @entry.Value
+            </td>
+            <td>
+                
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    }
+</table>
+
+

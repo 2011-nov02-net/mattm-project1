@@ -9,7 +9,7 @@
 <html>
 <body>
 
-    <table>
+    <table class="table" >
         <tr>
             <th>Location </th>
             <th>Address</th>
@@ -34,7 +34,7 @@
             @x.Country
         </td>
         <td>
-            <a href="Store/Locations/Inventory/@x.Id">Products</a> 
+            @Html.ActionLink("Products", "LocationInventory", new { id = x.Id }) 
         </td>
     </tr>
         }

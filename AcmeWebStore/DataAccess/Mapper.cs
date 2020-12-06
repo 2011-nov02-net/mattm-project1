@@ -18,6 +18,7 @@ namespace DataAccess
         {
             return new Library.Model.Location
             {
+                
                 Id = location.Id,
                 Address = location.Address,
                 City = location.City,

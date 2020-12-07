@@ -116,15 +116,14 @@ namespace AcmeWebStore.Controllers
                 return View(viewModel);
             }
         }
-        public IActionResult CreateOrder()
+        public IActionResult CreateOrder(int id)
         {
-            string locChoice = TempData["StringChoice"] as string;
+            int locChoice = id;
             Console.WriteLine(locChoice);
             TempData.Keep();
-            if (locChoice != null)
+            if (locChoice != 0)
             {
-                locChoice = TempData["StoreChoice"] as string;
-                var location = LocRepo.GetLocationById(Int32.Parse(locChoice));
+                var location = LocRepo.GetLocationById(locChoice);
                 ViewData["Location"] = location;
                 TempData.Keep();
                 return View();

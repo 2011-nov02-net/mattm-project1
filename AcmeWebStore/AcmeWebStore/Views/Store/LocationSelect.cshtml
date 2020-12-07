@@ -32,7 +32,7 @@
                     @x.Country
                 </td>
                 <td>
-                    @Html.ActionLink("Shop Here", "CreateOrder", new { id = x.Id }, TempData["StoreChoice"] = x.Id)
+                    @Html.ActionLink("Shop Here", "CreateOrder", new { id = x.Id })
                 </td>
             </tr>
         }

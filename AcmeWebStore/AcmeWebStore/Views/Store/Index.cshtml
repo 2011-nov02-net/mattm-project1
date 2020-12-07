@@ -14,12 +14,9 @@
 @if (TempData["name"] != null)
 {
     <h6>Welcome back @(TempData["name"])!</h6>
-    <form asp-action="CreateOrder">
-        <button id="newOrderButton" class="btn text-white" value="CreateOrder" >
-            New Order
-        </button>
-    </form>
-   
+        <button id="newOrderButton" class="btn text-white">
+            @Html.ActionLink("New Order", "CreateOrder", new { Id = 0 })
+        </button>   
 }
 @if (TempData["name"] == null) {
 <button id="newUserButton" class="btn btn-secondary text-white">

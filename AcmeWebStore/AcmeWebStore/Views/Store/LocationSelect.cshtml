@@ -1,0 +1,42 @@
+﻿@using Library.Model;
+
+@{
+}
+
+
+<html>
+<body>
+
+    <table class="table">
+        <tr>
+            <th>Location </th>
+            <th>Address</th>
+            <th> City</th>
+            <th>State</th>
+            <th>Country</th>
+        </tr>
+        @foreach (Location x in ViewData["Locations"] as List<Location>)
+        {
+            <tr>
+                <td>
+                    @x.Address
+                </td>
+                <td>
+
+                    @x.City
+                </td>
+                <td>
+                    @x.State
+                </td>
+                <td>
+                    @x.Country
+                </td>
+                <td>
+                    @Html.ActionLink("Shop Here", "CreateOrder", new { id = x.Id }, TempData["StoreChoice"] = x.Id)
+                </td>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

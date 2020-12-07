@@ -116,11 +116,34 @@ namespace AcmeWebStore.Controllers
                 return View(viewModel);
             }
         }
-        //public IActionResult CreateOrder(int locId)
-        //{
-        //    var location = new Library.Model.Location();
-        //    location = GetLocationById
-        //}
+        public IActionResult CreateOrder()
+        {
+            string locChoice = TempData["StringChoice"] as string;
+            Console.WriteLine(locChoice);
+            TempData.Keep();
+            if (locChoice != null)
+            {
+                locChoice = TempData["StoreChoice"] as string;
+                var location = LocRepo.GetLocationById(Int32.Parse(locChoice));
+                ViewData["Location"] = location;
+                TempData.Keep();
+                return View();
+            }
+            else
+            {
+                TempData.Keep();
+               return RedirectToAction("LocationSelect");
+            }
+            return View();
+        }
+        public IActionResult LocationSelect()
+        {
+            IEnumerable<Location> locations = LocRepo.GetLocations().ToList();
+
+            ViewData["Locations"] = locations;
+
+            return View();
+        }
 
     }
 }

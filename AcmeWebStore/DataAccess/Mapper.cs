@@ -49,5 +49,32 @@ namespace DataAccess
 
             return returnProd;
         }
+
+        public static DataAccess.Customer MapCustomerToDA(Library.Model.Customer customer)
+        {
+            DataAccess.Customer DaCustomer = new DataAccess.Customer();
+            DaCustomer.FirstName = customer.firstName;
+            DaCustomer.LastName = customer.lastName;
+            if(customer.favoriteStore != 0)
+            {
+                DaCustomer.FavoriteStore = customer.favoriteStore;
+            }
+            return DaCustomer;
+           
+        }
+
+        public static Library.Model.Customer MapDACustomerToLib(DataAccess.Customer customer)
+        {
+            Library.Model.Customer libCustomer = new Library.Model.Customer();
+            libCustomer.firstName = customer.FirstName;
+            libCustomer.lastName = customer.LastName;
+            if (customer.FavoriteStore != null)
+            {
+                libCustomer.favoriteStore = customer.FavoriteStore;
+            }
+            return libCustomer;
+
+
+        }
     }
 }

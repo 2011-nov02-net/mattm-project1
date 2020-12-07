@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Library.Interfaces
 {
-    interface ICustomerRepository
+    public interface ICustomerRepository
     {
+        void AddCustomer(Library.Model.Customer customer);
+
+        Library.Model.Customer GetCustomerByName(Library.Model.Customer customer);
+        void Save();
     }
 }

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Library.Interfaces
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
+
+        void Save();
     }
 }

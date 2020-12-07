@@ -12,13 +12,25 @@ namespace AcmeWebStore.Controllers
 {
     public class Store : Controller
     {
-        public ILocationRepository Repo { get; }
+        public ILocationRepository LocRepo { get; }
+        public ICustomerRepository CustRepo { get; }
+        public IProductRepository ProdRepo { get; }
+        public IOrderRepository OrdRepo { get; }
 
-        public Store(ILocationRepository repo) =>
-            Repo = repo ?? throw new ArgumentNullException(nameof(repo));
+        public Store(ILocationRepository locrepo, ICustomerRepository custrepo, IOrderRepository ordrepo, IProductRepository prodrepo)
+        {
+            LocRepo = locrepo ?? throw new ArgumentNullException(nameof(locrepo));
+            CustRepo = custrepo ?? throw new ArgumentNullException(nameof(custrepo));
+            ProdRepo = prodrepo ?? throw new ArgumentNullException(nameof(prodrepo));
+            OrdRepo = ordrepo ?? throw new ArgumentNullException(nameof(ordrepo));
+
+        }
+           
+ 
+           
         public IActionResult Index()
         {
-            ViewBag.numStores = Repo.CountLocations();
+            ViewBag.numStores = LocRepo.CountLocations();
             ViewBag.sales = 10223213;
             //ViewBag.sales = 1000000 + 
             return View();
@@ -33,7 +45,36 @@ namespace AcmeWebStore.Controllers
         {
             return View();
         }
-  
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(ViewModels.CustomerViewModel viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var customer = new Library.Model.Customer();
+                    customer.firstName = viewModel.firstName;
+                    customer.lastName = viewModel.lastName;
+                    var loggedCustomer = new Library.Model.Customer();
+                    loggedCustomer = CustRepo.GetCustomerByName(customer);
+                    string loggedName = $"{loggedCustomer.firstName} {loggedCustomer.lastName}";
+
+                    TempData["name"] = loggedName;
+                    
+
+
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(viewModel);
+            }
+            catch
+            {
+                return View(viewModel);
+            }
+
+        }
 
         //public IActionResult newOrder()
         //{
@@ -44,28 +85,31 @@ namespace AcmeWebStore.Controllers
         //    return View();
         //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(ViewModels.OrderViewModel viewModel)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var order = new Order();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCustomer(ViewModels.CustomerViewModel viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var customer = new Library.Model.Customer();
+                    customer.firstName = viewModel.firstName;
+                    customer.lastName = viewModel.lastName;
+                    customer.favoriteStore = 0;
 
-        //            Repo.AddOrder(order);
-        //            Repo.Save();
+                    CustRepo.AddCustomer(customer);
+                    CustRepo.Save();
 
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        //return View(viewModel);
-        //    }
-        //    catch
-        //    {
-        //        return View(viewModel);
-        //    }
-        //}
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(viewModel);
+            }
+            catch
+            {
+                return View(viewModel);
+            }
+        }
 
     }
 }

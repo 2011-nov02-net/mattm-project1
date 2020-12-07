@@ -19,5 +19,11 @@ namespace DataAccess.Repositories
             dbContext.Orders.Add(newOrder);
            
         }
+        public void Save()
+        {
+            //_logger.LogInformation("Saving changes to the database");
+            dbContext.SaveChanges();
+        }
+
     }
 }

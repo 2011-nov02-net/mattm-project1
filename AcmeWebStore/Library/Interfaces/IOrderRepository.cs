@@ -9,6 +9,8 @@ namespace Library.Interfaces
 {
     public interface IOrderRepository
     {
-       // void CreateOrder(Order x);
+        // void CreateOrder(Order x);
+
+        void Save();
     }
 }

@@ -14,6 +14,9 @@ namespace Library.Interfaces
         IEnumerable<Location> GetLocations();
 
         Location GetLocationById(int id);
+        
+        
+        void Save();
     }
    
 }

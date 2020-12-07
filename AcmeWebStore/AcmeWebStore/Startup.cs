@@ -30,7 +30,11 @@ namespace AcmeWebStore
             services.AddDbContext<AcmedbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AcmeDb")));
 
             services.AddScoped<ILocationRepository, LocationRepository>();
-            
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+
             services.AddControllersWithViews();
         }
 

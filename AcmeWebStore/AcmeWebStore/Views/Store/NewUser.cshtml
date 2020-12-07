@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AcmeWebStore.ViewModels.CustomerViewModel
+
 @{
     ViewData["Title"] = "NewUser";
 }
@@ -8,37 +7,19 @@
     <h3 class='center'>Create an Account</h3>
     <div class='center' id='signupAlertDiv'></div>
     <div class="row">
-        <form class=" form-group  s12" id="signUpForm">
+        <form class=" form-group  s12" asp-action="CreateCustomer" id="signUpForm">
             <div class="row">
                 <div class="form-control   col s6">
-                    <input name="firstname" placeholder="First name" id="signUpFirstname" type="text" class='validate' required />
+                    <input name="firstname" placeholder="First name" id="signUpFirstname" type="text" asp-for="firstName" class='validate' required />
                 </div>
                 <div class="form-control   col s6">
-                    <input name="lastname" placeholder="Last name" id="signUpLastname" type="text" class='validate' required />
+                    <input name="lastname" placeholder="Last name" id="signUpLastname" type="text" asp-for="lastName" class='validate' required />
                 </div>
             </div>
-            <div class="row">
-                <div class="form-control   col s12">
-                    <input name="address" placeholder="Address" id="signUpAddress" type="text" class='validate' required />
-                    <span class="helper-text" data-error="Please make a password"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control  col s6">
-                    <input name="city" placeholder="City" id="signUpCity" type="text" />
-                </div>
-                <div class="form-control   col s6">
-                    <input name="state" placeholder="State" id="signUpState" type="text" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-control  col s6">
-                    <input name="country" placeholder="Country" id="signUpCountry" type="text" />
-                </div>
-            </div>
+    
             <div class="row">
                 <div class='row center'>
-                    <button class='btn' id='signUpBtn'>
+                    <button class='btn' id='signUpBtn' value="CreateCustomer">
                         Sign Up
                     </button>
                 </div>

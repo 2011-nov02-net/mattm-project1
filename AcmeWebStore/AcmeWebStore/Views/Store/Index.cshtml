@@ -3,7 +3,7 @@
 *@
 @{
     ViewData["Title"] = "Index";
-    
+
 }
 
 <h2>Acme Web Store</h2>
@@ -11,11 +11,23 @@
 
 <p>Welcome to Acme! </p>
 
+@if (TempData["name"] != null)
+{
+    <h6>Welcome back @(TempData["name"])!</h6>
+    <button id="newOrderButton" class="btn text-white">
+        New Order
+    </button>
+}
+@if (TempData["name"] == null) {
 <button id="newUserButton" class="btn btn-secondary text-white">
-   New User
+    New User
 </button>
 <button id="signInButton" class="btn btn-primary text-white">
     Sign in
 </button>
+
+}
+
+
 
 

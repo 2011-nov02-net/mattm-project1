@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Library.Interfaces;
+using Library.Model;
 
 namespace DataAccess.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly AcmedbContext dbContext;
 
@@ -17,11 +19,10 @@ namespace DataAccess.Repositories
 
         /// <summary> Method to add a new customer to the DB </summary>
         /// <params> Takes in a customer object</params>
-        public void addCustomer(DataAccess.Customer customer)
+        public void AddCustomer(Library.Model.Customer customer)
         {
 
-            dbContext.Customers.Add(customer);
-            dbContext.SaveChanges();
+            dbContext.Customers.Add(Mapper.MapCustomerToDA(customer));
 
         }
         /// <summary> Method to return a list of current Customers</summary>
@@ -47,7 +48,18 @@ namespace DataAccess.Repositories
 
             return matchList;
         }
+        public Library.Model.Customer GetCustomerByName(Library.Model.Customer customer)
+        {
+            var returnCustomer = new Library.Model.Customer();
+            return returnCustomer = Mapper.MapDACustomerToLib(dbContext.Customers.Where(x => x.FirstName.Contains(customer.firstName) && x.LastName.Contains(customer.lastName)).FirstOrDefault());
+            
+        }
 
-
+        public void Save()
+        {
+            //_logger.LogInformation("Saving changes to the database");
+            dbContext.SaveChanges();
+        }
+      
     }
 }

@@ -9,7 +9,7 @@ namespace Library.Model
         private int _id;
         private string _firstName;
         private string _lastName;
-        private int _favoriteStore = 0;
+        private int? _favoriteStore = 0;
 
         public string firstName
         {
@@ -37,7 +37,7 @@ namespace Library.Model
             }
         }
 
-        public int favoriteStore
+        public int? favoriteStore
         {
             get => _favoriteStore;
             set

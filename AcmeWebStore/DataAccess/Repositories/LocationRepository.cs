@@ -50,5 +50,12 @@ namespace DataAccess.Repositories
         //{
         //    throw new NotImplementedException();
         //}
+
+        public void Save()
+        {
+            //_logger.LogInformation("Saving changes to the database");
+           dbContext.SaveChanges();
+        }
+       
     }
 }

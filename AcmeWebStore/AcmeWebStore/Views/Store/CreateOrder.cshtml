@@ -9,14 +9,17 @@
     <h3 class='center'>Select your products!</h3> <br />
     <div class='center' id='signupAlertDiv'></div>
     <div class="row">
-   
 
 
-        <h1>Select your products</h1>
 
-        <h2> Acme @location.City</h2> 
+        <br />
+        <h2> Acme @location.City</h2>
+        <br />
+        <br/>
         <h4>@(location.Address), @(location.City), @(location.State), @(location.Country)</h4>
-        <form class="form-group" asp-action="CreateNewOrder">
+        <br />
+        <br />>
+        <form asp-action="CreateNewOrder">
             <table class="table">
                 <tr>
                     <th>Name </th>
@@ -39,12 +42,13 @@
                             @entry.Value
                         </td>
                         <td>
-                            <input type="number" name="@name" value="@Model.orderContents[entry.Key.Id]"/>
+                            <input type="number" name="@name" value="@Model.orderContents[entry.Key.Id]" />
                         </td>
-                        
+
                     </tr>
                 }
             </table>
+
             <button class="btn" type="submit" value="CreateNewOrder">Submit Order</button>
         </form>
     </div>

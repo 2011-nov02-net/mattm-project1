@@ -14,9 +14,12 @@
 @if (TempData.Peek("name") != null)
 {
     <h6>Welcome back @(TempData.Peek("name"))!</h6>
-        <button id="newOrderButton" class="btn text-white">
+        <button id="newOrderButton" class="btn btn-secondary text-white">
             @Html.ActionLink("New Order", "CreateOrder", new { Id = 0 })
-        </button>   
+        </button> 
+        <button id="logoutButton" class="btn btn-primary text-white">
+            @Html.ActionLink("Logout", "Logout")
+        </button>
 }
 @if (TempData.Peek("name") == null) {
 <button id="newUserButton" class="btn btn-secondary text-white">

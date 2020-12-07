@@ -63,7 +63,7 @@ namespace AcmeWebStore.Controllers
                     string loggedName = $"{loggedCustomer.firstName} {loggedCustomer.lastName}";
 
                     TempData["name"] = loggedName;
-                    
+
 
 
                     return RedirectToAction(nameof(Index));
@@ -75,13 +75,7 @@ namespace AcmeWebStore.Controllers
                 return View(viewModel);
             }
 
-        }
-
-        //public IActionResult newOrder()
-        //{
-        //    return View();
-        //}
-   
+        }   
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -181,12 +175,20 @@ namespace AcmeWebStore.Controllers
 
                     //return RedirectToAction(nameof(Index));
                 }
-                return View();
+                return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+
+        public IActionResult Logout()
+        {
+            TempData.Remove("name");
+            TempData.Remove("StoreChoice");
+            return RedirectToAction("Index");
+
         }
 
 

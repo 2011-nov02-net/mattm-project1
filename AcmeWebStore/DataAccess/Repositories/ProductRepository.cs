@@ -16,6 +16,11 @@ namespace DataAccess.Repositories
             dbContext = context;
         }
 
+        public Library.Model.Product GetProductById(int id)
+        {
+            return Mapper.MapDAProductToLib(dbContext.Products.Where(x => x.Id == id).ToList().FirstOrDefault()) ;
+        }
+
         public void Save()
         {
             //_logger.LogInformation("Saving changes to the database");

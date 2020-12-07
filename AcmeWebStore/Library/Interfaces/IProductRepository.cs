@@ -8,7 +8,7 @@ namespace Library.Interfaces
 {
     public interface IProductRepository
     {
-
+        Library.Model.Product GetProductById(int id);
         void Save();
     }
 }

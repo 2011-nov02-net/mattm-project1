@@ -9,22 +9,41 @@ namespace Library.Model
         private int _id;
         private int _customerId;
         private int _locationId;
-        private Dictionary<int, int> _orderContents;
-
-
-        public void AddToOrder(int prodId, int quant, int available)
+        private Dictionary<Product, int> _orderContents;
+        public Order()
         {
-            if(CheckStock(quant, available))
+            orderContents = new Dictionary<Product, int>();
+        }
+
+        public Dictionary<Product, int> orderContents { get; set; }
+        public Dictionary<Product, int> OrderContents
+        {
+            get => _orderContents;
+            set
             {
-                _orderContents.Add(prodId, quant);
+               
+                _orderContents = value;
             }
-
-          
         }
 
-        public bool CheckStock(int requestQuant, int availableQuant)
+        public int CustomerId
         {
-            return (requestQuant <= availableQuant);
+            get => _customerId;
+            set
+            {
+                _customerId = value;
+            }
         }
+        
+        public int LocationId
+        {
+            get => _locationId;
+            set
+            {
+                _locationId = value;
+            }
+        }
+
+       
     }
 }

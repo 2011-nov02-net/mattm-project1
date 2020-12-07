@@ -14,9 +14,12 @@ namespace AcmeWebStore.ViewModels
 
         public string City { get; set; }
 
-        public Dictionary<ProductViewModel, int> Inventory { get; set; }
+        public string State { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:#.##}")]
-        public double? Score { get; set; }
+        public string Country { get; set; }
+
+        public Dictionary<Library.Model.Product, int> inventory { get; set; }
+
+     
     }
 }

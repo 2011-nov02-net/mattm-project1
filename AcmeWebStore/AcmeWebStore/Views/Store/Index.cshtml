@@ -11,14 +11,14 @@
 
 <p>Welcome to Acme! </p>
 
-@if (TempData["name"] != null)
+@if (TempData.Peek("name") != null)
 {
-    <h6>Welcome back @(TempData["name"])!</h6>
+    <h6>Welcome back @(TempData.Peek("name"))!</h6>
         <button id="newOrderButton" class="btn text-white">
             @Html.ActionLink("New Order", "CreateOrder", new { Id = 0 })
         </button>   
 }
-@if (TempData["name"] == null) {
+@if (TempData.Peek("name") == null) {
 <button id="newUserButton" class="btn btn-secondary text-white">
     New User
 </button>

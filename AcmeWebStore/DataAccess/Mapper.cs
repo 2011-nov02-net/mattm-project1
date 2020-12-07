@@ -68,12 +68,58 @@ namespace DataAccess
             Library.Model.Customer libCustomer = new Library.Model.Customer();
             libCustomer.firstName = customer.FirstName;
             libCustomer.lastName = customer.LastName;
+            libCustomer.Id = customer.Id;
             if (customer.FavoriteStore != null)
             {
                 libCustomer.favoriteStore = customer.FavoriteStore;
             }
             return libCustomer;
 
+
+        }
+        public static Library.Model.Product MapDAProductToLib(DataAccess.Product product)
+        {
+            Library.Model.Product libProduct = new Library.Model.Product();
+            libProduct.Id = product.Id;
+            libProduct.Name = product.Name;
+            libProduct.Price = product.Price;
+            return libProduct;
+
+        }
+
+        public static DataAccess.Product MapLibProductToDA(Library.Model.Product product)
+        {
+            DataAccess.Product DAProd = new Product();
+            DAProd.Id = product.Id;
+            DAProd.Name = product.Name;
+            DAProd.Price = product.Price;
+            return DAProd;
+        }
+
+        public static DataAccess.Order MapOrderToDAOrder(Library.Model.Order order)
+        {
+            DataAccess.Order DAOrder = new DataAccess.Order();
+            DAOrder.CustomerId = order.CustomerId;
+            foreach(KeyValuePair<Library.Model.Product, int> entry in order.orderContents){
+                OrderDetail item = new OrderDetail();
+                item.ProductId = entry.Key.Id;
+                item.LocationId = order.LocationId;
+                item.Quantity = entry.Value;
+
+                DAOrder.OrderDetails.Add(item);
+            }
+           
+            return DAOrder;
+            //foreach(KeyValuePair<Library.Model.Product, int> entry in order.OrderContents)
+            //{
+            //    DataAccess.OrderDetail details = new OrderDetail();
+            //    details.OrderDate = Date.Now();
+            //    details.LocationId = order.LocationId;
+            //    details.ProductId = entry.Key.Id;
+            //    details.Quantity = entry.Value;
+
+            //}
+            
 
         }
     }

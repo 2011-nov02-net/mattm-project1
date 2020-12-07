@@ -81,10 +81,7 @@ namespace AcmeWebStore.Controllers
         //{
         //    return View();
         //}
-        //public IActionResult CreateOrder()
-        //{
-        //    return View();
-        //}
+   
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -119,21 +116,25 @@ namespace AcmeWebStore.Controllers
         public IActionResult CreateOrder(int id)
         {
             int locChoice = id;
-            Console.WriteLine(locChoice);
-            TempData.Keep();
             if (locChoice != 0)
             {
-                var location = LocRepo.GetLocationById(locChoice);
+                Library.Model.Location location = LocRepo.GetLocationById(locChoice);
+                TempData.Peek("name");
+                TempData["StoreChoice"] = location.Id;
                 ViewData["Location"] = location;
+                var viewModel = new ViewModels.NewOrderViewModel();
+                foreach(var item in location.inventory)
+                {
+                    viewModel.orderContents.Add(item.Key.Id, 0);
+                }
                 TempData.Keep();
-                return View();
+                return View(viewModel);
             }
             else
             {
                 TempData.Keep();
                return RedirectToAction("LocationSelect");
             }
-            return View();
         }
         public IActionResult LocationSelect()
         {
@@ -143,6 +144,53 @@ namespace AcmeWebStore.Controllers
 
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNewOrder(AcmeWebStore.ViewModels.NewOrderViewModel viewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var order = new Library.Model.Order();
+
+                    //Console.WriteLine(viewModel);
+                    //foreach(var item in viewModel.orderContents)
+                    //{
+                    //    if(item.Value != 0)
+                    //    {
+                    //        order.OrderContents.Add(ProdRepo.GetProductById(item.Key), item.Value);
+                    //    }
+                    //}
+
+                    string[] customerNameArray = new string[2];
+                    string name = TempData["name"] as string;
+                    customerNameArray = name.Split(" ");
+                    Customer loggedCustomer = new Customer();
+                    loggedCustomer.firstName = customerNameArray[0];
+                    loggedCustomer.lastName = customerNameArray[1];
+                    order.CustomerId = CustRepo.GetCustomerByName(loggedCustomer).Id;
+                    foreach(KeyValuePair<int, int> entry in viewModel.orderContents)
+                    {
+                        order.orderContents.Add(ProdRepo.GetProductById(entry.Key), entry.Value);
+                    }
+                    
+                    OrdRepo.AddOrder(order);
+                    OrdRepo.Save();
+                   
+
+                   
+
+                    //return RedirectToAction(nameof(Index));
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
     }
 }

@@ -11,6 +11,14 @@ namespace Library.Model
         private string _lastName;
         private int? _favoriteStore = 0;
 
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+            }
+        }
         public string firstName
         {
             get => _firstName;

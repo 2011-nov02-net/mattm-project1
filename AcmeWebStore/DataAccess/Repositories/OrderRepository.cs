@@ -14,9 +14,10 @@ namespace DataAccess.Repositories
         {
             dbContext = context;
         }
-        public void CreateOrder(Order newOrder, int customerId, int locationId)
+        public void AddOrder(Library.Model.Order newOrder)
         {
-            dbContext.Orders.Add(newOrder);
+            DataAccess.Order DAOrder = Mapper.MapOrderToDAOrder(newOrder);
+            //dbContext.Orders.Add(Mapper.MapOrderToDAOrder(newOrder));
            
         }
         public void Save()

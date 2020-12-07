@@ -1,14 +1,56 @@
-﻿
-@model AcmeWebStore.ViewModels.OrderViewModel
+﻿@model AcmeWebStore.ViewModels.NewOrderViewModel
+@using Library.Model
+@{ 
+    Location location = ViewData["Location"] as Location;
 
+}
 
 <div class='container'>
-    <h3 class='center'>Select your products!</h3>
+    <h3 class='center'>Select your products!</h3> <br />
     <div class='center' id='signupAlertDiv'></div>
     <div class="row">
-        <form class=" form-group  s12" asp-action="CreateCustomer" id="signUpForm">
-       
+   
+
+
+        <h1>Select your products</h1>
+
+        <h2> Acme @location.City</h2> 
+        <h4>@(location.Address), @(location.City), @(location.State), @(location.Country)</h4>
+        <form class="form-group" asp-action="CreateNewOrder">
+            <table class="table">
+                <tr>
+                    <th>Name </th>
+                    <th>Price</th>
+                    <th>Quantity Available</th>
+                    <th>Quantity Desired</th>
+                </tr>
+                @foreach (KeyValuePair<Product, int> entry in location.inventory)
+                {
+                    var name = Html.NameFor(m => m.orderContents) + "[" + entry.Key.Id + "]";
+                    <tr>
+                        <td>
+                            @entry.Key.Name
+                        </td>
+                        <td>
+
+                            @entry.Key.Price
+                        </td>
+                        <td>
+                            @entry.Value
+                        </td>
+                        <td>
+                            <input type="number" name="@name" value="@Model.orderContents[entry.Key.Id]"/>
+                        </td>
+                        
+                    </tr>
+                }
+            </table>
+            <button class="btn" type="submit" value="CreateNewOrder">Submit Order</button>
         </form>
     </div>
 </div>
+
+<script>
+
+</script>
 

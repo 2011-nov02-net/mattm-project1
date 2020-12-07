@@ -33,10 +33,11 @@ namespace AcmeWebStore.Controllers
             ViewBag.numStores = LocRepo.CountLocations();
             ViewBag.sales = 10223213;
             //ViewBag.sales = 1000000 + 
+            TempData.Keep();
             return View();
         }
 
-        public IActionResult NewUser()
+        public IActionResult CreateCustomer()
         {
             return View();
         }
@@ -100,6 +101,11 @@ namespace AcmeWebStore.Controllers
 
                     CustRepo.AddCustomer(customer);
                     CustRepo.Save();
+                    var loggedCustomer = new Library.Model.Customer();
+                    loggedCustomer = CustRepo.GetCustomerByName(customer);
+                    string loggedName = $"{loggedCustomer.firstName} {loggedCustomer.lastName}";
+
+                    TempData["name"] = loggedName;
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -110,6 +116,11 @@ namespace AcmeWebStore.Controllers
                 return View(viewModel);
             }
         }
+        //public IActionResult CreateOrder(int locId)
+        //{
+        //    var location = new Library.Model.Location();
+        //    location = GetLocationById
+        //}
 
     }
 }

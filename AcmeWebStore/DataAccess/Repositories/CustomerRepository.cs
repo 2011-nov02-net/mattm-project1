@@ -27,7 +27,7 @@ namespace DataAccess.Repositories
         }
         /// <summary> Method to return a list of current Customers</summary>
 
-        public IEnumerable<DataAccess.Customer> getCustomers()
+        public List<DataAccess.Customer> getCustomers()
         {
             var customerList = dbContext.Customers.ToList();
 
@@ -42,17 +42,26 @@ namespace DataAccess.Repositories
         }
         /// <summary> Method to find a customer by name </summary>
         /// <params> Takes in a customer object of the customer to be searched on</params>
-        public IEnumerable<DataAccess.Customer> getcustomerByName(Customer searchCustomer)
-        {
-            var matchList = dbContext.Customers.Where(x => x.FirstName.Contains(searchCustomer.FirstName) && x.LastName.Contains(searchCustomer.LastName)).ToList();
-
-            return matchList;
-        }
+ 
         public Library.Model.Customer GetCustomerByName(Library.Model.Customer customer)
         {
-            var returnCustomer = new Library.Model.Customer();
-            return returnCustomer = Mapper.MapDACustomerToLib(dbContext.Customers.Where(x => x.FirstName.Contains(customer.firstName) && x.LastName.Contains(customer.lastName)).FirstOrDefault());
+            var returnCustomer = new DataAccess.Customer();
             
+            
+                returnCustomer = dbContext.Customers.Where(x => x.FirstName.Contains(customer.firstName) && x.LastName.Contains(customer.lastName)).FirstOrDefault();
+            if(returnCustomer == null)
+            {
+                var failedCustomer = new Library.Model.Customer();
+                failedCustomer.firstName = "0";
+                failedCustomer.lastName = "0";
+                return failedCustomer;
+            }
+            else
+            {
+                return Mapper.MapDACustomerToLib(returnCustomer);
+            }
+            
+           
         }
 
         public void Save()

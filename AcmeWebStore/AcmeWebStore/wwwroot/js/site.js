@@ -16,5 +16,5 @@ signInButton.on("click", () => {
 });
 
 newUserButton.on("click", () => {
-    window.location.href = "Store/NewUser"
+    window.location.href = "Store/CreateCustomer"
 });

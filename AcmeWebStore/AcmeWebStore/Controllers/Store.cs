@@ -154,14 +154,7 @@ namespace AcmeWebStore.Controllers
                 {
                     var order = new Library.Model.Order();
 
-                    //Console.WriteLine(viewModel);
-                    //foreach(var item in viewModel.orderContents)
-                    //{
-                    //    if(item.Value != 0)
-                    //    {
-                    //        order.OrderContents.Add(ProdRepo.GetProductById(item.Key), item.Value);
-                    //    }
-                    //}
+       
 
                     string[] customerNameArray = new string[2];
                     string name = TempData["name"] as string;
@@ -170,9 +163,14 @@ namespace AcmeWebStore.Controllers
                     loggedCustomer.firstName = customerNameArray[0];
                     loggedCustomer.lastName = customerNameArray[1];
                     order.CustomerId = CustRepo.GetCustomerByName(loggedCustomer).Id;
+                    order.LocationId = Int32.Parse(TempData["StoreChoice"].ToString());
                     foreach(KeyValuePair<int, int> entry in viewModel.orderContents)
                     {
-                        order.orderContents.Add(ProdRepo.GetProductById(entry.Key), entry.Value);
+                        if(entry.Value != 0)
+                        {
+                            order.orderContents.Add(ProdRepo.GetProductById(entry.Key), entry.Value);
+                        }
+                        
                     }
                     
                     OrdRepo.AddOrder(order);

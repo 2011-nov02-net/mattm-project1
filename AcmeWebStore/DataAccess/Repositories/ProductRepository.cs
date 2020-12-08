@@ -15,7 +15,9 @@ namespace DataAccess.Repositories
         {
             dbContext = context;
         }
-
+        /// <summary> Method to get product by id </summary>
+        /// <params> int id to search on</params>
+        /// <returns> Returns a Library Model product</returns>
         public Library.Model.Product GetProductById(int id)
         {
             return Mapper.MapDAProductToLib(dbContext.Products.Where(x => x.Id == id).ToList().FirstOrDefault()) ;

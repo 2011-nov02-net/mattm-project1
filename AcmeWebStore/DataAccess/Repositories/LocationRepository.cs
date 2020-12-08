@@ -22,8 +22,9 @@ namespace DataAccess.Repositories
             var count = dbContext.Locations.Count();
             return count;
         }
-
-        // <summary> Method to return a list of current locations </summary>
+        /// <summary> Method to find all locations </summary>
+        /// <params> none</params>
+        /// <returns> none</returns>
         public IEnumerable<Library.Model.Location> GetLocations()
         {
             var locationList = dbContext.Locations.ToList();
@@ -36,7 +37,9 @@ namespace DataAccess.Repositories
                     Country = x.Country
                 });          
         }
-
+        /// <summary> Method to find a location by Id </summary>
+        /// <params> Int of location id to search</params>
+        /// <returns> Returns a Library Model Location</returns>
         public Library.Model.Location GetLocationById(int id)
         {
             Library.Model.Location location = new Library.Model.Location();
@@ -46,7 +49,9 @@ namespace DataAccess.Repositories
             return location;
 
         }
-
+        /// <summary> Method to find a location by id with inventory </summary>
+        /// <params> Int of location id to search</params>
+        /// <returns> Returns a Library Model Location with inventory</returns>
         public Library.Model.Location GetLocationByIdWithInventory(int id)
         {
             Library.Model.Location location = new Library.Model.Location();
@@ -55,6 +60,9 @@ namespace DataAccess.Repositories
             location = DataAccess.Mapper.MapLocationWithInventory(DaLocation);
             return location;
         }
+        /// <summary> Method to find a location by id with orders </summary>
+        /// <params> Int of location id to search</params>
+        /// <returns> Returns a Library Model Location with orders</returns>
         public Library.Model.Location GetLocationByIdWithOrders(int id)
         {
             Library.Model.Location returnLocation = new Library.Model.Location();

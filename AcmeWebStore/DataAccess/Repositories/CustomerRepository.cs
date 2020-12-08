@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
         }
 
         /// <summary> Method to add a new customer to the DB </summary>
-        /// <params> Takes in a customer object</params>
+        /// <params> Takes in a Library customer object</params>
         public void AddCustomer(Library.Model.Customer customer)
         {
 
@@ -47,7 +47,8 @@ namespace DataAccess.Repositories
 
         }
         /// <summary> Method to find a customer by name </summary>
-        /// <params> Takes in a customer object of the customer to be searched on</params>
+        /// <params> Takes in a Library customer object of the customer to be searched on</params>
+        /// <returns> Returns a Library Model Customer</returns>
  
         public Library.Model.Customer GetCustomerByName(Library.Model.Customer customer)
         {
@@ -69,7 +70,9 @@ namespace DataAccess.Repositories
             
            
         }
-
+        /// <summary> Method to find a customer by name including orders</summary>
+        /// <params> Takes in a Library customer object of the customer to be searched on</params>
+        /// <returns> Returns a Library Model Customer with orders</returns>
         public Library.Model.Customer GetCustomerByNameWithOrders(Library.Model.Customer customer)
         {
             var returnCustomer = new DataAccess.Customer();
@@ -89,6 +92,9 @@ namespace DataAccess.Repositories
             }
 
         }
+        /// <summary> Method to find a customer by Id </summary>
+        /// <params> Takes in int of the ID to search on</params>
+        /// <returns> Returns a Library Model Customer</returns>
         public Library.Model.Customer GetCustomerById(int id)
         {
             return Mapper.MapDACustomerToLib(dbContext.Customers.Where(c => c.Id == id).FirstOrDefault());

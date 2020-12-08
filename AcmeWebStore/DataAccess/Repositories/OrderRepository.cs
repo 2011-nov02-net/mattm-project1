@@ -19,6 +19,9 @@ namespace DataAccess.Repositories
             logger = _logger;
         }
 
+        /// <summary> Method to get all orders </summary>
+        /// <params> none</params>
+        /// <returns> Returns a list of Library Model Orders</returns>
         public List<Library.Model.Order> GetOrders()
         {
             List<Library.Model.Order> newList = new List<Library.Model.Order>();
@@ -31,6 +34,9 @@ namespace DataAccess.Repositories
             return newList;
 
         }
+        /// <summary> Method to add a new order to DB </summary>
+        /// <params> Library.Model.Order</params>
+        /// <returns> Returns a a boolean to show success of add</returns>
         public bool AddOrder(Library.Model.Order order)
         {
             foreach(KeyValuePair<Library.Model.Product, int> pair in order.OrderContents)
@@ -65,6 +71,9 @@ namespace DataAccess.Repositories
             dbContext.SaveChanges();
         }
 
+        /// <summary> Method to get order by id </summary>
+        /// <params> int id to search on</params>
+        /// <returns> Returns a list of Library Model Orders</returns>
         public Library.Model.Order GetOrderById(int id)
         {
             Library.Model.Order order = new Library.Model.Order();

@@ -8,14 +8,9 @@ namespace DataAccess
 {
     public static class Mapper
     {
-        /// <summary>
-        /// Maps an Entity Framework restaurant DAO to a business model,
-        /// including all reviews if present.
-        /// </summary>
-        /// <param name="Location">The restaurant DAO.</param>
-        /// <returns>The restaurant business model.</returns>
-        /// 
-        
+        /// <summary> Method to map a DA Location w/ inventory to Library location </summary>
+        /// <params> DA Location</params>
+        /// <returns> Library Model Location</returns>
         public static Library.Model.Location MapLocationWithInventory(DataAccess.Location location)
         {
             return new Library.Model.Location
@@ -29,7 +24,9 @@ namespace DataAccess
                 inventory = MapInventory(location.LocationStocks)
             };
         }
-
+        /// <summary> Method to map a Library Location to DA location </summary>
+        /// <params> Library Location</params>
+        /// <returns> DA Model Location</returns>
         public static Library.Model.Location MapLocation(DataAccess.Location location)
         {
             return new Library.Model.Location
@@ -41,7 +38,9 @@ namespace DataAccess
                 Country = location.Country
             };
         }
-
+        /// <summary> Method to map a DA Location to Library location with order </summary>
+        /// <params> DA Location</params>
+        /// <returns> Library Model Location</returns>
         public static Library.Model.Location MapLocationWithOrders(DataAccess.Location location)
         {
             Library.Model.Location libLocation = new Library.Model.Location();
@@ -63,7 +62,9 @@ namespace DataAccess
             }
             return libLocation;
         }
-
+        /// <summary> Method to map a locationstock to Library location inventory </summary>
+        /// <params> DA location stock</params>
+        /// <returns> Dictionary of Library product/int</returns>
         public static Dictionary<Library.Model.Product, int> MapInventory(ICollection<DataAccess.LocationStock> items)
         {
             var dictionary = new Dictionary<Library.Model.Product, int>();
@@ -75,7 +76,9 @@ namespace DataAccess
             return dictionary;
 
         }
-
+        /// <summary> Method to map a DA product to model product </summary>
+        /// <params> DA product</params>
+        /// <returns> model product</returns>
         public static Library.Model.Product MapProduct(DataAccess.Product product)
         {
             Library.Model.Product returnProd = new Library.Model.Product();
@@ -85,7 +88,9 @@ namespace DataAccess
 
             return returnProd;
         }
-
+        /// <summary> Method to map a Library customer to DA customer </summary>
+        /// <params> Model customer</params>
+        /// <returns> DA customer</returns>
         public static DataAccess.Customer MapCustomerToDA(Library.Model.Customer customer)
         {
             DataAccess.Customer DaCustomer = new DataAccess.Customer();
@@ -98,7 +103,9 @@ namespace DataAccess
             return DaCustomer;
            
         }
-
+        /// <summary> Method to map a DA Customer to model customer </summary>
+        /// <params>DA customer</params>
+        /// <returns> Model customer</returns>
         public static Library.Model.Customer MapDACustomerToLib(DataAccess.Customer customer)
         {
             Library.Model.Customer libCustomer = new Library.Model.Customer();
@@ -114,7 +121,9 @@ namespace DataAccess
 
         }
 
-
+        /// <summary> Method to map a DA Customer to model customer with orders </summary>
+        /// <params> DA customer</params>
+        /// <returns> model customer</returns>
         public static Library.Model.Customer MapDACustomerToLibWithOrders(DataAccess.Customer customer)
         {
             Library.Model.Customer libCustomer = new Library.Model.Customer();
@@ -135,9 +144,10 @@ namespace DataAccess
                 libCustomer.Orders.Add(libOrder);
             }
             return libCustomer;
-
-
         }
+        /// <summary> Method to map a DA product to model product </summary>
+        /// <params> DA product</params>
+        /// <returns> model product</returns>
         public static Library.Model.Product MapDAProductToLib(DataAccess.Product product)
         {
             Library.Model.Product libProduct = new Library.Model.Product();
@@ -147,7 +157,9 @@ namespace DataAccess
             return libProduct;
 
         }
-
+        /// <summary> Method to map a Library product to DA product </summary>
+        /// <params> Library product</params>
+        /// <returns> DA product</returns>
         public static DataAccess.Product MapLibProductToDA(Library.Model.Product product)
         {
             DataAccess.Product DAProd = new Product();
@@ -156,7 +168,9 @@ namespace DataAccess
             DAProd.Price = product.Price;
             return DAProd;
         }
-
+        /// <summary> Method to map a Library order to DA order </summary>
+        /// <params> Library order</params>
+        /// <returns> DA order</returns>
         public static DataAccess.Order MapOrderToDAOrder(Library.Model.Order order)
         {
             DataAccess.Order DAOrder = new DataAccess.Order();
@@ -172,7 +186,9 @@ namespace DataAccess
            
             return DAOrder;
         }
-
+        /// <summary> Method to map a DA Prder to model order </summary>
+        /// <params> DA order</params>
+        /// <returns> model order</returns>
         public static Library.Model.Order MapDaOrderToLib(DataAccess.Order order)
         {
             Library.Model.Order newOrder = new Library.Model.Order();
@@ -182,7 +198,9 @@ namespace DataAccess
             return newOrder;
        
         }
-
+        /// <summary> Method to map a DA order details to a model order </summary>
+        /// <params> DA order w/ details</params>
+        /// <returns> library model w/order</returns>
         public static List<Library.Model.OrderDetails> MapOrderDetailsToLib(DataAccess.Order order)
         {
             List<Library.Model.OrderDetails> returnDetails = new List<Library.Model.OrderDetails>();

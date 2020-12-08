@@ -59,10 +59,14 @@ namespace AcmeWebStore.Controllers
                     view.Customer.firstName = customer.firstName;
                     view.Customer.lastName = customer.lastName;
                     view.Customer.Id = customer.Id;
-                    Library.Model.Location location = LocRepo.GetLocationById(order.Details[0].LocationId);
-                    view.Location.Id = location.Id;
-                    view.Location.City = location.City;
+                    if(order.Details.Count > 0)
+                    {
+                        Library.Model.Location location = LocRepo.GetLocationById(order.Details[0].LocationId);
+                        view.Location.Id = location.Id;
+                        view.Location.City = location.City;
+                    }
                 }
+              
                 foreach(Library.Model.OrderDetails orderDetails in order.Details)
                 {
                     Library.Model.Product product = ProdRepo.GetProductById(orderDetails.ProductId);

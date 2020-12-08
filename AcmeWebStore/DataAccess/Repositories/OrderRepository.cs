@@ -48,5 +48,11 @@ namespace DataAccess.Repositories
             dbContext.SaveChanges();
         }
 
+        public Library.Model.Order GetOrderById(int id)
+        {
+            Library.Model.Order order = new Library.Model.Order();
+            order = Mapper.MapDaOrderToLib(dbContext.Orders.Where(x => x.Id == id).Include(o => o.OrderDetails).FirstOrDefault());
+            return order;
+        }
     }
 }

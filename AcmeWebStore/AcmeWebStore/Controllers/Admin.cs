@@ -75,9 +75,32 @@ namespace AcmeWebStore.Controllers
                 counter++;
                 viewModel.Add(view);
             }
-
-
             return View(viewModel);
         }
+
+        public IActionResult OrderDetails(int id)
+        {
+            ViewModels.OrderViewModel view = new ViewModels.OrderViewModel();
+            Library.Model.Order libOrder = OrdRepo.GetOrderById(id);
+            view.Id = libOrder.Id;
+            Library.Model.Customer customer = CustRepo.GetCustomerById(libOrder.CustomerId);
+            view.Customer.firstName = customer.firstName;
+            view.Customer.lastName = customer.lastName;
+            view.Customer.Id = customer.Id;
+            Library.Model.Location location = LocRepo.GetLocationById(libOrder.Details[0].LocationId);
+            view.Location.Id = location.Id;
+            view.Location.City = location.City;
+            foreach (Library.Model.OrderDetails orderDetails in libOrder.Details)
+            {
+                Library.Model.Product product = ProdRepo.GetProductById(orderDetails.ProductId);
+                ViewModels.ProductViewModel productViewModel = new ViewModels.ProductViewModel();
+                productViewModel.Name = product.Name;
+                productViewModel.Price = product.Price;
+                view.OrderContents.Add(productViewModel, orderDetails.Quantity);
+                view.Total = decimal.Round(view.GetTotalPrice(), 2);
+            }
+
+            return View(view);
+            }
     }
 }

@@ -13,6 +13,8 @@ namespace Library.Interfaces
         void AddOrder(Order order);
 
         List<Order> GetOrders();
+
+        Order GetOrderById(int id);
         void Save();
     }
 }

@@ -39,6 +39,10 @@ namespace DataAccess.Repositories
             foreach(OrderDetail item in DAOrder.OrderDetails)
             {
                 order.OrderDetails.Add(item);
+
+                var result = dbContext.LocationStocks.Where(x => x.ProductId == item.ProductId && x.LocationId == item.LocationId).FirstOrDefault();
+                result.Quantity = (result.Quantity - item.Quantity);
+                dbContext.SaveChanges();
             } 
            
         }

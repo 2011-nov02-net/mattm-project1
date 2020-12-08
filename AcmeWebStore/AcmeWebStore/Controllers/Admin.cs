@@ -10,10 +10,19 @@ namespace AcmeWebStore.Controllers
 {
     public class Admin : Controller
     {
-        public ILocationRepository Repo { get; }
+        public ILocationRepository LocRepo { get; }
+        public ICustomerRepository CustRepo { get; }
+        public IProductRepository ProdRepo { get; }
+        public IOrderRepository OrdRepo { get; }
 
-        public Admin(ILocationRepository repo) =>
-            Repo = repo ?? throw new ArgumentNullException(nameof(repo));
+
+        public Admin(ILocationRepository repo, ICustomerRepository custrepo, IOrderRepository ordrepo, IProductRepository prodrepo)
+        {
+            LocRepo = repo ?? throw new ArgumentNullException(nameof(repo));
+            CustRepo = custrepo ?? throw new ArgumentNullException(nameof(custrepo));
+            ProdRepo = prodrepo ?? throw new ArgumentNullException(nameof(prodrepo));
+            OrdRepo = ordrepo ?? throw new ArgumentNullException(nameof(ordrepo));
+        }
         public IActionResult Index()
         {
             return View();
@@ -21,7 +30,7 @@ namespace AcmeWebStore.Controllers
 
         public IActionResult Locations()
         {
-            IEnumerable<Location> locations = Repo.GetLocations().ToList();
+            IEnumerable<Location> locations = LocRepo.GetLocations().ToList();
 
             ViewData["Locations"] = locations;
 
@@ -30,9 +39,44 @@ namespace AcmeWebStore.Controllers
 
         public IActionResult LocationInventory(int id)
         {
-            Location thisLocation = Repo.GetLocationById(id);
+            Location thisLocation = LocRepo.GetLocationById(id);
             ViewData["Location"] = thisLocation;
             return View();
+        }
+
+        public IActionResult OrderSummaries()
+        {
+            List<ViewModels.OrderViewModel> viewModel = new List<ViewModels.OrderViewModel>();
+            List<Library.Model.Order> libOrder = OrdRepo.GetOrders();
+            foreach(Library.Model.Order order in libOrder)
+            {
+                int counter = 0;
+                ViewModels.OrderViewModel view = new ViewModels.OrderViewModel();
+                if(counter == 0)
+                {
+                    view.Id = order.Id;
+                    Library.Model.Customer customer = CustRepo.GetCustomerById(order.CustomerId);
+                    view.Customer.firstName = customer.firstName;
+                    view.Customer.lastName = customer.lastName;
+                    view.Customer.Id = customer.Id;
+                    Library.Model.Location location = LocRepo.GetLocationById(order.Details[0].LocationId);
+                    view.Location.Id = location.Id;
+                    view.Location.City = location.City;
+                }
+                foreach(Library.Model.OrderDetails orderDetails in order.Details)
+                {
+                    Library.Model.Product product = ProdRepo.GetProductById(orderDetails.ProductId);
+                    ViewModels.ProductViewModel productViewModel = new ViewModels.ProductViewModel();
+                    productViewModel.Name = product.Name;
+                    productViewModel.Price = product.Price;
+                    view.OrderContents.Add(productViewModel, orderDetails.Quantity);
+                }
+                counter++;
+               
+            }
+
+
+            return View(viewModel);
         }
     }
 }

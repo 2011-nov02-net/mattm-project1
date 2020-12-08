@@ -63,6 +63,10 @@ namespace DataAccess.Repositories
             
            
         }
+        public Library.Model.Customer GetCustomerById(int id)
+        {
+            return Mapper.MapDACustomerToLib(dbContext.Customers.Where(c => c.Id == id).FirstOrDefault());
+        }
 
         public void Save()
         {

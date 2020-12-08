@@ -10,12 +10,33 @@ namespace Library.Model
         private int _customerId;
         private int _locationId;
         private Dictionary<Product, int> _orderContents;
+        private List<OrderDetails> _details;
+     
         public Order()
         {
-            orderContents = new Dictionary<Product, int>();
+            OrderContents = new Dictionary<Product, int>();
+
+
         }
 
-        public Dictionary<Product, int> orderContents { get; set; }
+        public List<OrderDetails> Details
+        {
+            get => _details;
+            set
+            {
+                _details = value;
+            }
+        }
+
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+            }
+        }
+
         public Dictionary<Product, int> OrderContents
         {
             get => _orderContents;

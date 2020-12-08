@@ -7,5 +7,9 @@ namespace AcmeWebStore.ViewModels
 {
     public class ProductViewModel
     {
+        public string Name;
+        
+        public decimal Price;
+
     }
 }

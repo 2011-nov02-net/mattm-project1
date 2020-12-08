@@ -1,0 +1,41 @@
+﻿@model List<AcmeWebStore.ViewModels.OrderViewModel >
+
+@{
+}
+
+
+<h1>Order Summary</h1>
+
+<h2> Acme </h2>
+
+
+<table class="table">
+    <tr>
+        <th>Order Id </th>
+        <th>Customer</th>
+        <th>Items sold</th>
+        <th>Total Price</th>
+        <th>Details</th>
+
+    </tr>
+    @foreach (AcmeWebStore.ViewModels.OrderViewModel order in Model)
+    {
+        <tr>
+            <td>
+                @order.Id
+            </td>
+            <td>
+                @order.Customer.firstName @order.Customer.lastName
+            </td>
+            <td>
+                @order.GetItemsSold();
+            </td>
+            <td>
+                @order.GetTotalPrice();
+            </td>
+            <td>
+                @Html.ActionLink("Details", "OrderDetails", new { id = order.Id });
+            </td>
+        </tr>
+    }
+</table>

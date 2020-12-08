@@ -162,7 +162,7 @@ namespace AcmeWebStore.Controllers
                     {
                         if(entry.Value != 0)
                         {
-                            order.orderContents.Add(ProdRepo.GetProductById(entry.Key), entry.Value);
+                            order.OrderContents.Add(ProdRepo.GetProductById(entry.Key), entry.Value);
                         }
                         
                     }

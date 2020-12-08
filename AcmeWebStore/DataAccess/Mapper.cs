@@ -14,6 +14,8 @@ namespace DataAccess
         /// </summary>
         /// <param name="Location">The restaurant DAO.</param>
         /// <returns>The restaurant business model.</returns>
+        /// 
+        
         public static Library.Model.Location MapLocationWithInventory(DataAccess.Location location)
         {
             return new Library.Model.Location
@@ -25,6 +27,18 @@ namespace DataAccess
                 State = location.State,
                 Country = location.Country,                
                 inventory = MapInventory(location.LocationStocks)
+            };
+        }
+
+        public static Library.Model.Location MapLocation(DataAccess.Location location)
+        {
+            return new Library.Model.Location
+            {
+                Id = location.Id,
+                Address = location.Address,
+                City = location.City,
+                State = location.State,
+                Country = location.Country
             };
         }
 
@@ -100,7 +114,7 @@ namespace DataAccess
         {
             DataAccess.Order DAOrder = new DataAccess.Order();
             DAOrder.CustomerId = order.CustomerId;
-            foreach(KeyValuePair<Library.Model.Product, int> entry in order.orderContents){
+            foreach(KeyValuePair<Library.Model.Product, int> entry in order.OrderContents){
                 OrderDetail item = new OrderDetail();
                 item.ProductId = entry.Key.Id;
                 item.LocationId = order.LocationId;
@@ -110,17 +124,34 @@ namespace DataAccess
             }
            
             return DAOrder;
-            //foreach(KeyValuePair<Library.Model.Product, int> entry in order.OrderContents)
-            //{
-            //    DataAccess.OrderDetail details = new OrderDetail();
-            //    details.OrderDate = Date.Now();
-            //    details.LocationId = order.LocationId;
-            //    details.ProductId = entry.Key.Id;
-            //    details.Quantity = entry.Value;
-
-            //}
-            
-
         }
+
+        public static Library.Model.Order MapDaOrderToLib(DataAccess.Order order)
+        {
+            Library.Model.Order newOrder = new Library.Model.Order();
+            newOrder.CustomerId = order.CustomerId;
+            newOrder.Id = order.Id;
+            newOrder.Details = MapOrderDetailsToLib(order);
+            return newOrder;
+       
+        }
+
+        public static List<Library.Model.OrderDetails> MapOrderDetailsToLib(DataAccess.Order order)
+        {
+            List<Library.Model.OrderDetails> returnDetails = new List<Library.Model.OrderDetails>();
+            foreach(OrderDetail detail in order.OrderDetails)
+            {
+                Library.Model.OrderDetails newDetail = new Library.Model.OrderDetails();
+                newDetail.Id = detail.Id;
+                newDetail.LocationId = detail.LocationId;
+                newDetail.OrderId = detail.OrderId;
+                newDetail.ProductId = detail.ProductId;
+                newDetail.Quantity = detail.Quantity;
+                returnDetails.Add(newDetail);
+            }
+
+            return returnDetails;
+        }
+
     }
 }

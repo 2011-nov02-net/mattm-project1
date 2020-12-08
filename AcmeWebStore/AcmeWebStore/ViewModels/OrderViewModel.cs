@@ -9,25 +9,36 @@ namespace AcmeWebStore.ViewModels
     {
       
             public int Id;
-            public int CustomerId;
-            public int LocationId;
-            public Dictionary<int, int> OrderContents;
+            public CustomerViewModel Customer;
+            public LocationViewModel Location;
+            public Dictionary<ProductViewModel, int> OrderContents;
+
+        public OrderViewModel()
+        {
+            OrderContents = new Dictionary<ProductViewModel, int>();
+            Customer = new CustomerViewModel();
+            Location = new LocationViewModel();
 
 
-            public void AddToOrder(int prodId, int quant, int available)
+        }
+
+        public int GetItemsSold()
+        {
+            return this.OrderContents.Values.Sum();
+        }
+
+        public decimal GetTotalPrice()
+        {
+            decimal total = new decimal();
+            foreach(KeyValuePair<ProductViewModel, int> contents in this.OrderContents)
             {
-                if (CheckStock(quant, available))
-                {
-                    OrderContents.Add(prodId, quant);
-                }
-
-
+                total += contents.Key.Price * contents.Value;
             }
+            return total;
+        }
 
-            public bool CheckStock(int requestQuant, int availableQuant)
-            {
-                return (requestQuant <= availableQuant);
-            }
+
+      
         
     }
 }

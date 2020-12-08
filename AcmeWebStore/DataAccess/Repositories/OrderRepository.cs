@@ -15,6 +15,19 @@ namespace DataAccess.Repositories
         {
             dbContext = context;
         }
+
+        public List<Library.Model.Order> GetOrders()
+        {
+            List<Library.Model.Order> newList = new List<Library.Model.Order>();
+            List<DataAccess.Order> DaList = new List<DataAccess.Order>();
+               DaList=  dbContext.Orders.Include(o => o.OrderDetails).ToList();
+            foreach(DataAccess.Order order in DaList)
+            {
+                newList.Add(Mapper.MapDaOrderToLib(order));
+            }
+            return newList;
+
+        }
         public void AddOrder(Library.Model.Order newOrder)
         {
             Console.WriteLine(newOrder);

@@ -11,6 +11,8 @@ namespace Library.Interfaces
     {
         // void CreateOrder(Order x);
         void AddOrder(Order order);
+
+        List<Order> GetOrders();
         void Save();
     }
 }

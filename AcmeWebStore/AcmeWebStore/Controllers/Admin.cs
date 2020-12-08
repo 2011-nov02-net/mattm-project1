@@ -70,9 +70,10 @@ namespace AcmeWebStore.Controllers
                     productViewModel.Name = product.Name;
                     productViewModel.Price = product.Price;
                     view.OrderContents.Add(productViewModel, orderDetails.Quantity);
+                    view.Total = decimal.Round(view.GetTotalPrice(), 2);
                 }
                 counter++;
-               
+                viewModel.Add(view);
             }
 
 

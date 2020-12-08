@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace AcmeWebStore.ViewModels
 {
     public class OrderViewModel
     {
       
-            public int Id;
-            public CustomerViewModel Customer;
-            public LocationViewModel Location;
-            public Dictionary<ProductViewModel, int> OrderContents;
+            
 
         public OrderViewModel()
         {
             OrderContents = new Dictionary<ProductViewModel, int>();
             Customer = new CustomerViewModel();
             Location = new LocationViewModel();
-
-
         }
+        public int Id;
+        public CustomerViewModel Customer { get; set; }
+        public LocationViewModel Location { get; set; }
+        public Dictionary<ProductViewModel, int> OrderContents { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal Total { get; set; }
 
         public int GetItemsSold()
         {

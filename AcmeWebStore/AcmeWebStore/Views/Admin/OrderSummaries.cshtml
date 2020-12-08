@@ -1,6 +1,7 @@
-﻿@model List<AcmeWebStore.ViewModels.OrderViewModel >
+﻿@model List<AcmeWebStore.ViewModels.OrderViewModel>
 
 @{
+
 }
 
 
@@ -28,13 +29,14 @@
                 @order.Customer.firstName @order.Customer.lastName
             </td>
             <td>
-                @order.GetItemsSold();
+                @order.GetItemsSold()
             </td>
             <td>
-                @order.GetTotalPrice();
+             
+                $@order.Total
             </td>
             <td>
-                @Html.ActionLink("Details", "OrderDetails", new { id = order.Id });
+                @Html.ActionLink("Details", "OrderDetails", new { id = order.Id })
             </td>
         </tr>
     }

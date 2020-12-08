@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Library.Interfaces;
 using Library.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DataAccess.Repositories
 {
@@ -13,9 +14,12 @@ namespace DataAccess.Repositories
     {
         private readonly AcmedbContext dbContext;
 
-        public CustomerRepository(AcmedbContext context)
+        private readonly ILogger<CustomerRepository> logger;
+
+        public CustomerRepository(AcmedbContext context, ILogger<CustomerRepository> _logger)
         {
             dbContext = context;
+            logger = _logger;
         }
 
         /// <summary> Method to add a new customer to the DB </summary>
@@ -31,6 +35,7 @@ namespace DataAccess.Repositories
         public List<DataAccess.Customer> getCustomers()
         {
             var customerList = dbContext.Customers.ToList();
+            logger.LogInformation("Retrieving all customer");
 
             return customerList.Select(x => new DataAccess.Customer()
             {

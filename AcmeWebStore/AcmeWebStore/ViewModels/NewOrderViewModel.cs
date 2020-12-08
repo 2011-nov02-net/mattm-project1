@@ -12,5 +12,7 @@ namespace AcmeWebStore.ViewModels
             orderContents = new Dictionary<int, int>();
         }
         public Dictionary<int, int> orderContents { get; set; }
+
+        public string? Message { get; set; }
     }
 }

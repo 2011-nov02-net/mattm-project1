@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Library.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DataAccess.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
         private readonly AcmedbContext dbContext;
-        public OrderRepository(AcmedbContext context)
+        private readonly ILogger<OrderRepository> logger;
+        public OrderRepository(AcmedbContext context, ILogger<OrderRepository> _logger)
         {
             dbContext = context;
+            logger = _logger;
         }
 
         public List<Library.Model.Order> GetOrders()
@@ -28,9 +31,19 @@ namespace DataAccess.Repositories
             return newList;
 
         }
-        public void AddOrder(Library.Model.Order order)
+        public bool AddOrder(Library.Model.Order order)
         {
-            Console.WriteLine(order);
+            foreach(KeyValuePair<Library.Model.Product, int> pair in order.OrderContents)
+            {
+                bool sufficientStock = pair.Value < dbContext.LocationStocks.Where(p => p.ProductId == pair.Key.Id && p.LocationId == order.LocationId).FirstOrDefault().Quantity;
+                if(sufficientStock == false)
+                {
+                    logger.LogInformation($"Not enough stock for product #{pair.Key.Id}");
+                    return false;
+                    throw new ArgumentException("Insufficient Stock");
+                }
+            }
+          
             DataAccess.Order DAOrder = Mapper.MapOrderToDAOrder(order);
             dbContext.Orders.Add(DAOrder);
             dbContext.SaveChanges();
@@ -43,8 +56,8 @@ namespace DataAccess.Repositories
                 var result = dbContext.LocationStocks.Where(x => x.ProductId == item.ProductId && x.LocationId == item.LocationId).FirstOrDefault();
                 result.Quantity = (result.Quantity - item.Quantity);
                 dbContext.SaveChanges();
-            } 
-           
+            }
+            return true;
         }
         public void Save()
         {

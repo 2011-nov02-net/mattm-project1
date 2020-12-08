@@ -7,18 +7,18 @@
 
 <div class='container'>
     <h3 class='center'>Select your products!</h3> <br />
-    <div class='center' id='signupAlertDiv'></div>
-    <div class="row">
+ 
 
 
 
         <br />
         <h2> Acme @location.City</h2>
-        <br />
-        <br/>
+     
+        <h4 class="text-danger"> @Model.Message</h4>
+     
         <h4>@(location.Address), @(location.City), @(location.State), @(location.Country)</h4>
-        <br />
-        <br />>
+     
+    <div class="row">
         <form asp-action="CreateNewOrder">
             <table class="table">
                 <tr>
@@ -36,7 +36,7 @@
                         </td>
                         <td>
 
-                            @entry.Key.Price
+                            $@decimal.Round(entry.Key.Price, 2)
                         </td>
                         <td>
                             @entry.Value
@@ -51,7 +51,8 @@
 
             <button class="btn" type="submit" value="CreateNewOrder">Submit Order</button>
         </form>
-    </div>
+        </div>
+  
 </div>
 
 <script>

@@ -10,7 +10,7 @@ namespace Library.Interfaces
     public interface IOrderRepository
     {
         // void CreateOrder(Order x);
-        void AddOrder(Order order);
+        bool AddOrder(Order order);
 
         List<Order> GetOrders();
 

@@ -107,7 +107,7 @@ namespace AcmeWebStore.Controllers
                 return View(viewModel);
             }
         }
-        public IActionResult CreateOrder(int id)
+        public IActionResult CreateOrder(int id, string? message)
         {
             int locChoice = id;
             if (locChoice != 0)
@@ -122,6 +122,10 @@ namespace AcmeWebStore.Controllers
                     viewModel.orderContents.Add(item.Key.Id, 0);
                 }
                 TempData.Keep();
+                if(message != null)
+                {
+                    viewModel.Message = message;
+                }
                 return View(viewModel);
             }
             else
@@ -167,7 +171,11 @@ namespace AcmeWebStore.Controllers
                         
                     }
                     
-                    OrdRepo.AddOrder(order);
+                    bool success = OrdRepo.AddOrder(order);
+                    if(success != true)
+                    {
+                        return RedirectToAction("CreateOrder", new { id = order.LocationId, message = "Quantity requested too large" });
+                    }
                     OrdRepo.Save();
                    
 

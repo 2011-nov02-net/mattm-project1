@@ -15,6 +15,7 @@ namespace Library.Model
         public Order()
         {
             OrderContents = new Dictionary<Product, int>();
+            Details = new List<OrderDetails>();
 
 
         }

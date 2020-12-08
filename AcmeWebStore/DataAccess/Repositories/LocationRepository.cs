@@ -47,6 +47,15 @@ namespace DataAccess.Repositories
 
         }
 
+        public Library.Model.Location GetLocationByIdWithInventory(int id)
+        {
+            Library.Model.Location location = new Library.Model.Location();
+            DataAccess.Location DaLocation = new DataAccess.Location();
+            DaLocation = dbContext.Locations.Include(l => l.LocationStocks).ThenInclude(l => l.Product).Where(l => l.Id == id).FirstOrDefault();
+            location = DataAccess.Mapper.MapLocationWithInventory(DaLocation);
+            return location;
+        }
+
         //IEnumerable<Library.Model.Location> ILocationRepository.getLocations()
         //{
         //    throw new NotImplementedException();

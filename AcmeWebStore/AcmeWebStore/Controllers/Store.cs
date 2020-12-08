@@ -112,7 +112,7 @@ namespace AcmeWebStore.Controllers
             int locChoice = id;
             if (locChoice != 0)
             {
-                Library.Model.Location location = LocRepo.GetLocationById(locChoice);
+                Library.Model.Location location = LocRepo.GetLocationByIdWithInventory(locChoice);
                 TempData.Peek("name");
                 TempData["StoreChoice"] = location.Id;
                 ViewData["Location"] = location;

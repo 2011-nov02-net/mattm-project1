@@ -13,6 +13,8 @@ namespace Library.Interfaces
 
         IEnumerable<Location> GetLocations();
 
+        Location GetLocationByIdWithInventory(int id);
+
         Location GetLocationById(int id);
         
         

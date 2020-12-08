@@ -24,6 +24,8 @@ namespace AcmeWebStore.ViewModels
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Total { get; set; }
 
+        public int Items { get; set; }
+
         public int GetItemsSold()
         {
             return this.OrderContents.Values.Sum();

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Library.Interfaces;
 using Library.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
 {
@@ -58,10 +59,30 @@ namespace DataAccess.Repositories
             }
             else
             {
-                return Mapper.MapDACustomerToLib(returnCustomer);
+                return Mapper.MapDACustomerToLibWithOrders(returnCustomer);
             }
             
            
+        }
+
+        public Library.Model.Customer GetCustomerByNameWithOrders(Library.Model.Customer customer)
+        {
+            var returnCustomer = new DataAccess.Customer();
+
+
+            returnCustomer = dbContext.Customers.Include(x=> x.Orders).ThenInclude(x => x.OrderDetails).Where(x => x.FirstName.Contains(customer.firstName) && x.LastName.Contains(customer.lastName)).FirstOrDefault();
+            if (returnCustomer == null)
+            {
+                var failedCustomer = new Library.Model.Customer();
+                failedCustomer.firstName = "0";
+                failedCustomer.lastName = "0";
+                return failedCustomer;
+            }
+            else
+            {
+                return Mapper.MapDACustomerToLibWithOrders(returnCustomer);
+            }
+
         }
         public Library.Model.Customer GetCustomerById(int id)
         {

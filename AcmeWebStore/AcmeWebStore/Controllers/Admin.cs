@@ -102,5 +102,57 @@ namespace AcmeWebStore.Controllers
 
             return View(view);
             }
+
+        public IActionResult OrderLookupCustomer()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CustomerSearchDetails(AcmeWebStore.ViewModels.CustomerViewModel view)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var customer = new Library.Model.Customer();
+                    customer.firstName = view.firstName;
+                    customer.lastName = view.lastName;
+                    var searchedCustomer = new Library.Model.Customer();
+                    searchedCustomer = CustRepo.GetCustomerByNameWithOrders(customer);
+                    foreach(Order order in searchedCustomer.Orders)
+                    {
+                       
+                        ViewModels.OrderViewModel newOrder = new ViewModels.OrderViewModel();
+                        newOrder.Id = order.Id;
+                        var locID = order.Details[0].LocationId;
+                        var thisLocation = LocRepo.GetLocationById(locID);
+                        newOrder.Location.Id = thisLocation.Id;
+                        newOrder.Location.City = thisLocation.City;
+                      
+                       foreach(Library.Model.OrderDetails detail in order.Details)
+                        {
+                            Library.Model.Product prod = ProdRepo.GetProductById(detail.ProductId);
+                            ViewModels.ProductViewModel prodModel = new ViewModels.ProductViewModel();
+                            prodModel.Name = prod.Name;
+                            prodModel.Price = prod.Price;
+                            newOrder.OrderContents.Add(prodModel, detail.Quantity);
+  
+                        }
+                        newOrder.Total = decimal.Round((newOrder.GetTotalPrice()), 2);
+                        newOrder.Items = newOrder.GetItemsSold();         
+                        view.Orders.Add(newOrder);
+                    }
+                    return View(view);
+                }
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
     }
 }

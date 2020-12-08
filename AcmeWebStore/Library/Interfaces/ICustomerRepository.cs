@@ -12,6 +12,8 @@ namespace Library.Interfaces
 
         Library.Model.Customer GetCustomerByName(Library.Model.Customer customer);
 
+        Library.Model.Customer GetCustomerByNameWithOrders(Library.Model.Customer customer);
+
         Library.Model.Customer GetCustomerById(int id);
         void Save();
     }

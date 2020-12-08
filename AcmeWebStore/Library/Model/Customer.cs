@@ -10,6 +10,21 @@ namespace Library.Model
         private string _firstName;
         private string _lastName;
         private int? _favoriteStore = 0;
+        private List<Library.Model.Order> _orders;
+
+        public Customer()
+        {
+            Orders = new List<Order>();
+        }
+
+        public List<Library.Model.Order> Orders
+        {
+            get => _orders;
+            set
+            {
+                _orders = value;
+            }
+        }
 
         public int Id
         {

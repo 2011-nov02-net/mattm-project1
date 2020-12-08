@@ -5,6 +5,10 @@ namespace AcmeWebStore.ViewModels
 {
     public class CustomerViewModel
     {
+        public CustomerViewModel()
+        {
+           Orders = new List<OrderViewModel>();
+        }
         // the HTML/tag helpers like "DisplayNameFor"
         // will use this instead of the property's name
         [Display(Name = "ID")]
@@ -14,15 +18,8 @@ namespace AcmeWebStore.ViewModels
         public string firstName { get; set; }
         [Required]
         public string lastName { get; set; }
-        //[Required]
-        //public string address { get; set; }
-        //[Required]
-        //public string city { get; set; }
-        //[Required]
-        //public string state { get; set; }
-        //[Required]
-        //public string country { get; set; }
-
+      
+        public List<OrderViewModel> Orders { get; set; }
     
     }
 }

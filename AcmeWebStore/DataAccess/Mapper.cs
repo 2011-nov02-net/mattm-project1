@@ -91,6 +91,31 @@ namespace DataAccess
 
 
         }
+
+
+        public static Library.Model.Customer MapDACustomerToLibWithOrders(DataAccess.Customer customer)
+        {
+            Library.Model.Customer libCustomer = new Library.Model.Customer();
+            libCustomer.firstName = customer.FirstName;
+            libCustomer.lastName = customer.LastName;
+            libCustomer.Id = customer.Id;
+            if (customer.FavoriteStore != null)
+            {
+                libCustomer.favoriteStore = customer.FavoriteStore;
+            }
+ 
+            foreach(DataAccess.Order order in customer.Orders)
+            {
+                Library.Model.Order libOrder = new Library.Model.Order();
+                libOrder.Id = order.Id;
+                libOrder.CustomerId = order.CustomerId;
+                libOrder.Details = MapOrderDetailsToLib(order);
+                libCustomer.Orders.Add(libOrder);
+            }
+            return libCustomer;
+
+
+        }
         public static Library.Model.Product MapDAProductToLib(DataAccess.Product product)
         {
             Library.Model.Product libProduct = new Library.Model.Product();
@@ -152,6 +177,8 @@ namespace DataAccess
 
             return returnDetails;
         }
+
+ 
 
     }
 }

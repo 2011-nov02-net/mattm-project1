@@ -13,14 +13,33 @@ namespace Library.Model
         private string _country;
         private List<int> _orderIds;
         private List<Order> _orders;
+        private Dictionary<int, int> _inventory;
+        private int _purchaseLimit;
 
         public  Location()
         {
             OrderIds = new List<int>();
             Orders = new List<Order>();
+            Inventory = new Dictionary<int, int>();
+
 
         }
-
+        public int PurchaseLimit
+        {
+            get => _purchaseLimit;
+            set
+            {
+                _purchaseLimit = value;
+            }
+        }
+        public Dictionary<int, int> Inventory
+        {
+            get => _inventory;
+            set
+            {
+                _inventory = value;
+            }
+        }
         public List<int> OrderIds
         {
             get => _orderIds;
@@ -102,5 +121,38 @@ namespace Library.Model
         public Dictionary<Product, int> inventory { get; set; } = new Dictionary<Product, int>();
 
         public List<Order> locationOrders = new List<Order>();
+
+        public bool CheckStock(int prodId, int quantity)
+        {
+            if(this.Inventory[prodId] >= quantity)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void AddStock(int prodId, int quantity)
+        {
+            this.Inventory[prodId] += quantity;
+        }
+
+        public void RemoveStock(int prodId, int quantity)
+        {
+            this.Inventory[prodId] -= quantity;
+        }
+
+        public bool CheckPurchaseSize(int quant)
+        {
+            if(quant > this.PurchaseLimit)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

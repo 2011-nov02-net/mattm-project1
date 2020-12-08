@@ -11,12 +11,14 @@ namespace Library.Model
         private string _lastName;
         private int? _favoriteStore = 0;
         private List<Library.Model.Order> _orders;
+        private double _discount;
 
         public Customer()
         {
             Orders = new List<Order>();
         }
 
+        public double Discount { get; set; }
         public List<Library.Model.Order> Orders
         {
             get => _orders;
@@ -71,7 +73,36 @@ namespace Library.Model
 
         public List<Order> customerOrders { get; set; } = new List<Order>();
 
+        public void CreateEarnedDiscount()
+        {
+            if(Orders.Count > 10)
+            {
+                this.Discount = 0.95;
+            } 
+        }
 
+        public void DefaultFavoriteStore()
+        {
+            int count = 0;
+            int trackId = 0;
+            foreach(Order order in Orders)
+            {
+                if (order.LocationId == trackId)
+                {
+                    count++;
+                    if (count == 5)
+                    {
+                        this.favoriteStore = order.LocationId;
+                    }
+
+                }
+                else
+                {
+                    count = 0;
+                }
+                trackId = order.LocationId;
+            }
+        }
 
 
     }

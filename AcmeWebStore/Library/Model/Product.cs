@@ -46,7 +46,12 @@ namespace Library.Model
                 _price = value;
             }
         }
-        
 
+        public void Discount(decimal discount)
+        {
+            this.Price *= discount;
+
+        }
+        
     }
 }

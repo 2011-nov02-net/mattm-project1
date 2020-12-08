@@ -42,6 +42,28 @@ namespace DataAccess
             };
         }
 
+        public static Library.Model.Location MapLocationWithOrders(DataAccess.Location location)
+        {
+            Library.Model.Location libLocation = new Library.Model.Location();
+            libLocation.Id = location.Id;
+            libLocation.Address = location.Address;
+            libLocation.City = location.City;
+            libLocation.Country = location.Country;
+            foreach(OrderDetail detail in location.OrderDetails)
+            {
+                if (libLocation.OrderIds.Contains(detail.OrderId))
+                {
+                    continue;
+                }
+                else
+                {
+                    libLocation.OrderIds.Add(detail.OrderId);
+                }
+             
+            }
+            return libLocation;
+        }
+
         public static Dictionary<Library.Model.Product, int> MapInventory(ICollection<DataAccess.LocationStock> items)
         {
             var dictionary = new Dictionary<Library.Model.Product, int>();

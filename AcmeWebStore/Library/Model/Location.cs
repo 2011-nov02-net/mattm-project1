@@ -11,6 +11,32 @@ namespace Library.Model
         private string _city;
         private string _state;
         private string _country;
+        private List<int> _orderIds;
+        private List<Order> _orders;
+
+        public  Location()
+        {
+            OrderIds = new List<int>();
+            Orders = new List<Order>();
+
+        }
+
+        public List<int> OrderIds
+        {
+            get => _orderIds;
+            set
+            {
+                _orderIds = value;
+            }
+        }
+        public List<Order> Orders
+        {
+            get => _orders;
+            set
+            {
+                _orders = value;
+            }
+        }
 
         public int Id
         {

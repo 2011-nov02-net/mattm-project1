@@ -16,6 +16,8 @@ namespace Library.Interfaces
         Location GetLocationByIdWithInventory(int id);
 
         Location GetLocationById(int id);
+
+        Location GetLocationByIdWithOrders(int id);
         
         
         void Save();

@@ -36,6 +36,9 @@
         <td>
             @Html.ActionLink("Inventory", "LocationInventory", new { id = x.Id }) 
         </td>
+        <td>
+            @Html.ActionLink("Order History", "LocationOrders", new { id = x.Id})
+        </td>
     </tr>
         }
     </table>

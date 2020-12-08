@@ -39,7 +39,7 @@ namespace AcmeWebStore.Controllers
 
         public IActionResult LocationInventory(int id)
         {
-            Location thisLocation = LocRepo.GetLocationById(id);
+            Location thisLocation = LocRepo.GetLocationByIdWithInventory(id);
             ViewData["Location"] = thisLocation;
             return View();
         }
@@ -154,5 +154,36 @@ namespace AcmeWebStore.Controllers
             }
 
         }
+
+        public IActionResult LocationOrders(int id)
+        {
+            Library.Model.Location location = LocRepo.GetLocationByIdWithOrders(id);
+            ViewModels.LocationViewModel viewModel = new ViewModels.LocationViewModel();
+            foreach(Library.Model.Order order in location.Orders)
+            {
+                ViewModels.OrderViewModel newOrder = new ViewModels.OrderViewModel();
+                newOrder.Id = order.Id;
+                Library.Model.Customer customer = CustRepo.GetCustomerById(order.CustomerId);
+                newOrder.Customer.firstName = customer.firstName;
+                newOrder.Customer.lastName = customer.lastName;
+                newOrder.Customer.Id = customer.Id;
+                Library.Model.Location thisLocation = LocRepo.GetLocationById(order.Details[0].LocationId);
+                newOrder.Location.Id = location.Id;
+                newOrder.Location.City = location.City;
+                foreach (Library.Model.OrderDetails orderDetails in order.Details)
+                {
+                    Library.Model.Product product = ProdRepo.GetProductById(orderDetails.ProductId);
+                    ViewModels.ProductViewModel productViewModel = new ViewModels.ProductViewModel();
+                    productViewModel.Name = product.Name;
+                    productViewModel.Price = product.Price;
+                    newOrder.OrderContents.Add(productViewModel, orderDetails.Quantity);
+                    newOrder.Total = decimal.Round(newOrder.GetTotalPrice(), 2);
+                }
+                viewModel.Orders.Add(newOrder);
+
+            }
+            return View(viewModel);
+        }
+     
     }
 }

@@ -23,7 +23,7 @@ namespace DataAccess.Repositories
             return count;
         }
 
-        /// <summary> Method to return a list of current locations </summary>
+        // <summary> Method to return a list of current locations </summary>
         public IEnumerable<Library.Model.Location> GetLocations()
         {
             var locationList = dbContext.Locations.ToList();
@@ -55,12 +55,20 @@ namespace DataAccess.Repositories
             location = DataAccess.Mapper.MapLocationWithInventory(DaLocation);
             return location;
         }
+        public Library.Model.Location GetLocationByIdWithOrders(int id)
+        {
+            Library.Model.Location returnLocation = new Library.Model.Location();
+            var DaLocation = dbContext.Locations.Include(l => l.OrderDetails).ThenInclude(l => l.Order).Where(l => l.Id == id).FirstOrDefault();
+            returnLocation = Mapper.MapLocationWithOrders(DaLocation);
+            foreach(int orderId in returnLocation.OrderIds)
+            {
+                var order = dbContext.Orders.Include(o => o.OrderDetails).Where(o => o.Id == orderId).FirstOrDefault();
+                returnLocation.Orders.Add(Mapper.MapDaOrderToLib(order));
+            }
+            return returnLocation;
+        }
 
-        //IEnumerable<Library.Model.Location> ILocationRepository.getLocations()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+     
         public void Save()
         {
             //_logger.LogInformation("Saving changes to the database");

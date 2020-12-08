@@ -41,8 +41,7 @@ namespace Library.Model
         {
             get => _orderContents;
             set
-            {
-               
+            {  
                 _orderContents = value;
             }
         }
@@ -64,6 +63,7 @@ namespace Library.Model
                 _locationId = value;
             }
         }
+   
 
        
     }

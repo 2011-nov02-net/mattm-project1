@@ -28,17 +28,17 @@ namespace DataAccess.Repositories
             return newList;
 
         }
-        public void AddOrder(Library.Model.Order newOrder)
+        public void AddOrder(Library.Model.Order order)
         {
-            Console.WriteLine(newOrder);
-            DataAccess.Order DAOrder = Mapper.MapOrderToDAOrder(newOrder);
+            Console.WriteLine(order);
+            DataAccess.Order DAOrder = Mapper.MapOrderToDAOrder(order);
             dbContext.Orders.Add(DAOrder);
             dbContext.SaveChanges();
             int newId = DAOrder.Id;
-            var order = dbContext.Orders.Include(o => o.OrderDetails).Where(o => o.Id == newId).FirstOrDefault();
+            var newOrder = dbContext.Orders.Include(o => o.OrderDetails).Where(o => o.Id == newId).FirstOrDefault();
             foreach(OrderDetail item in DAOrder.OrderDetails)
             {
-                order.OrderDetails.Add(item);
+                newOrder.OrderDetails.Add(item);
 
                 var result = dbContext.LocationStocks.Where(x => x.ProductId == item.ProductId && x.LocationId == item.LocationId).FirstOrDefault();
                 result.Quantity = (result.Quantity - item.Quantity);

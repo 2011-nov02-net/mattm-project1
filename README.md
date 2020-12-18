@@ -3,11 +3,11 @@
 A simulated online store front. Allows users to sign up, log in, and make purchases. The app tracks inventory at various locations, and allows and overview of order history (either all orders, by store, or by user).
 
 #Technologies Used
-ASP.NET
-Microsoft Entity Framework
-SQL Server
-Azure App Services
-Azure DevOps
+ASP.NET  
+Microsoft Entity Framework  
+SQL Server  
+Azure App Services  
+Azure DevOps  
 
 # Table of Contents
 

@@ -18,9 +18,9 @@ IV. [Questions](#questions)
 
 
 ## Installation
-
-git clone https://github.com/2011-nov02-net/mattm-project1 to run a local instance
-The site can be found at https://anothertestwebapp.azurewebsites.net/
+To run locally:  
+git clone https://github.com/2011-nov02-net/mattm-project1  
+The site can also be found [here](https://anothertestwebapp.azurewebsites.net/).
 
 ## Usage
 

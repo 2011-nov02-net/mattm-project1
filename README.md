@@ -31,7 +31,7 @@ A signed in user may select a store, and then order from that store's inventory.
 A user can also select the admin link at the bottom of the page to get information about stores, their inventories, and past orders.
 
 ## Licenses
-This project is under the MIT License.
+This project is under the [MIT License](https://github.com/git/git-scm.com/blob/master/MIT-LICENSE.txt).
 
 
 ## Questions
